@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#14110F">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>LOG — Lift / Fast / Weigh</title>
+<title>LOG</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
@@ -60,7 +60,6 @@
     font-weight: 800;
     font-size: 28px;
     letter-spacing: -0.02em;
-    color: var(--text);
   }
 
   header h1 .dot { color: var(--accent); }
@@ -73,8 +72,8 @@
   }
 
   main {
-    padding: 24px 20px 100px;
-    max-width: 600px;
+    padding: 20px 20px 100px;
+    max-width: 640px;
     margin: 0 auto;
   }
 
@@ -92,153 +91,175 @@
     letter-spacing: 0.18em;
     color: var(--text-muted);
     margin-bottom: 8px;
-  }
-
-  /* ---- WORKOUTS ---- */
-
-  .week-summary {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 20px;
-    margin-bottom: 24px;
-  }
-
-  .week-summary .label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--text-muted);
-  }
-
-  .week-summary .count {
-    font-family: var(--serif);
-    font-weight: 800;
-    font-size: 48px;
-    line-height: 1;
-    margin: 8px 0 4px;
-    letter-spacing: -0.03em;
-  }
-
-  .week-summary .count .of {
-    color: var(--text-muted);
-    font-size: 24px;
-  }
-
-  .week-summary .progress-dots {
-    display: flex;
-    gap: 6px;
-    margin-top: 16px;
-  }
-
-  .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-  }
-
-  .dot.filled {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
-
-  .week-summary .message {
-    font-size: 12px;
-    color: var(--text-dim);
-    margin-top: 14px;
-    font-style: italic;
-    font-family: var(--serif);
-  }
-
-  .workout-cards {
-    display: grid;
-    gap: 12px;
-  }
-
-  .workout-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 18px 20px;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    text-align: left;
-    color: inherit;
-    font: inherit;
-    width: 100%;
-  }
-
-  .workout-card:active {
-    transform: scale(0.98);
-    background: var(--surface-2);
-  }
-
-  .workout-card .header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
+    align-items: baseline;
+  }
+  .section-label .meta { font-size: 10px; color: var(--text-muted); letter-spacing: 0.1em; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px 18px;
+    margin-bottom: 18px;
   }
 
-  .workout-card .title {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 20px;
+  .today-banner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 22px;
   }
-
-  .workout-card .badge {
-    font-size: 10px;
+  .stat-pill {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 8px;
+    text-align: center;
+  }
+  .stat-pill .label {
+    font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 0.15em;
     color: var(--text-muted);
-    padding: 4px 8px;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-  }
-
-  .workout-card .focus {
-    font-size: 12px;
-    color: var(--text-dim);
-    margin-bottom: 12px;
-  }
-
-  .workout-card .exercises {
-    font-size: 11px;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-
-  /* ---- ACTIVE WORKOUT ---- */
-
-  .active-workout {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 20px;
-  }
-
-  .active-workout h2 {
-    font-family: var(--serif);
-    font-size: 24px;
     margin-bottom: 4px;
   }
-
-  .active-workout .focus {
-    font-size: 12px;
-    color: var(--text-dim);
-    margin-bottom: 20px;
+  .stat-pill .val {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
   }
+  .stat-pill .val.active { color: var(--accent); }
+  .stat-pill .val.muted { color: var(--text-muted); }
+
+  .row { display: flex; gap: 10px; align-items: center; }
+
+  input[type="number"], input[type="text"], input[type="datetime-local"], textarea {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 12px 14px;
+    border-radius: 3px;
+    width: 100%;
+    font-variant-numeric: tabular-nums;
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+  textarea { min-height: 90px; resize: vertical; line-height: 1.6; }
+
+  button.primary, button.secondary, button.danger {
+    padding: 14px 18px;
+    border: none;
+    border-radius: 4px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  button.primary { background: var(--accent); color: var(--bg); }
+  button.primary:active { background: #C8881F; transform: scale(0.98); }
+  button.primary:disabled { background: var(--surface-2); color: var(--text-muted); cursor: not-allowed; }
+  button.secondary { background: transparent; color: var(--text-dim); border: 1px solid var(--border); }
+  button.secondary:active { background: var(--surface-2); }
+  button.danger { background: transparent; color: var(--danger); border: 1px solid var(--danger); }
+  button.danger:active { background: rgba(196, 88, 66, 0.15); }
+
+  .button-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .move-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 12px;
+    cursor: pointer;
+    text-align: left;
+    color: inherit;
+    font: inherit;
+    transition: all 0.15s;
+  }
+  .move-card:active { transform: scale(0.97); background: var(--bg); }
+  .move-card .title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+  .move-card .sub { font-size: 10px; color: var(--text-muted); letter-spacing: 0.05em; }
+  .move-card.suggested { border-color: var(--accent-dim); }
+  .move-card.suggested .title { color: var(--accent); }
+
+  .fast-inline { display: flex; align-items: center; gap: 14px; }
+  .fast-inline .time-block { flex: 1; min-width: 0; }
+  .fast-inline .time {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: 26px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .fast-inline .time.dim { color: var(--text-muted); }
+  .fast-inline .progress-row { margin-top: 8px; font-size: 10px; color: var(--text-muted); letter-spacing: 0.05em; }
+
+  .progress-track {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 8px 0;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.5s ease;
+    border-radius: 2px;
+  }
+  .progress-fill.complete { background: var(--success); }
+
+  .fast-started-row {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  .edit-link {
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    padding: 4px 0;
+  }
+
+  .active-workout h2 { font-family: var(--serif); font-size: 22px; margin-bottom: 4px; }
+  .active-workout .focus { font-size: 11px; color: var(--text-dim); margin-bottom: 16px; letter-spacing: 0.05em; }
 
   .exercise-row {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 14px 0;
+    padding: 13px 0;
     border-top: 1px solid var(--border);
     cursor: pointer;
   }
-
   .exercise-row:last-of-type { border-bottom: 1px solid var(--border); }
 
   .checkbox {
@@ -252,298 +273,75 @@
     flex-shrink: 0;
     transition: all 0.15s;
   }
+  .checkbox.checked { background: var(--accent); border-color: var(--accent); }
+  .checkbox.checked::after { content: '✓'; color: var(--bg); font-weight: 700; font-size: 14px; }
 
-  .checkbox.checked {
-    background: var(--accent);
-    border-color: var(--accent);
-  }
-
-  .checkbox.checked::after {
-    content: '✓';
-    color: var(--bg);
-    font-weight: 700;
-    font-size: 14px;
-  }
-
-  .exercise-row.done .exercise-name {
-    color: var(--text-muted);
-    text-decoration: line-through;
-  }
-
+  .exercise-row.done .exercise-name { color: var(--text-muted); text-decoration: line-through; }
   .exercise-info { flex: 1; }
+  .exercise-name { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+  .exercise-sets { font-size: 11px; color: var(--text-muted); letter-spacing: 0.05em; }
 
-  .exercise-name {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 2px;
-  }
-
-  .exercise-sets {
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
-  }
-
-  .button-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 24px;
-  }
-
-  button.primary, button.secondary {
-    flex: 1;
-    padding: 16px;
-    border: none;
-    border-radius: 4px;
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
-  button.primary {
-    background: var(--accent);
-    color: var(--bg);
-  }
-
-  button.primary:active { background: #C8881F; transform: scale(0.98); }
-  button.primary:disabled { background: var(--surface-2); color: var(--text-muted); cursor: not-allowed; }
-
-  button.secondary {
-    background: transparent;
-    color: var(--text-dim);
-    border: 1px solid var(--border);
-  }
-
-  button.secondary:active { background: var(--surface-2); }
-
-  /* ---- HISTORY ---- */
-
-  .history-section { margin-top: 32px; }
+  .button-row { display: flex; gap: 10px; margin-top: 18px; }
+  .button-row button { flex: 1; }
 
   .history-item {
     display: flex;
     justify-content: space-between;
-    padding: 12px 0;
+    align-items: center;
+    padding: 11px 0;
     border-bottom: 1px solid var(--border);
     font-size: 12px;
+    gap: 12px;
   }
+  .history-item:last-child { border-bottom: none; }
+  .history-item .date { color: var(--text-dim); white-space: nowrap; font-size: 11px; }
+  .history-item .type { color: var(--accent); font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+  .history-item .detail { color: var(--text); font-size: 12px; flex: 1; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-  .history-item .date { color: var(--text-dim); }
-  .history-item .type { color: var(--accent); font-weight: 600; }
-
-  /* ---- FAST ---- */
-
-  .timer-display {
-    text-align: center;
-    padding: 32px 20px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    margin-bottom: 20px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .timer-status {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
+  .empty {
     color: var(--text-muted);
-    margin-bottom: 20px;
-  }
-
-  .timer-status.active { color: var(--accent); }
-
-  .timer-time {
+    font-size: 12px;
+    padding: 14px 0;
+    font-style: italic;
     font-family: var(--serif);
-    font-weight: 800;
-    font-size: 56px;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    margin-bottom: 8px;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .timer-time.dim { color: var(--text-muted); }
-
-  .timer-sub {
-    font-size: 11px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-  }
-
-  .progress-track {
-    height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    margin: 24px 0 12px;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: var(--accent);
-    transition: width 0.5s ease;
-    border-radius: 2px;
-  }
-
-  .progress-fill.complete {
-    background: var(--success);
-  }
-
-  .timer-meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    color: var(--text-muted);
-  }
-
-  .goal-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 20px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    margin-bottom: 20px;
-  }
-
-  .goal-row label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--text-dim);
-  }
-
-  .goal-row input {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-family: var(--mono);
-    font-size: 14px;
-    padding: 8px 12px;
-    border-radius: 3px;
-    width: 80px;
     text-align: center;
   }
 
-  /* ---- WEIGHT ---- */
-
-  .weight-current {
+  .trend-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 4px;
-    padding: 24px 20px;
+    padding: 18px;
     margin-bottom: 16px;
   }
-
-  .weight-current .label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-  }
-
-  .weight-current .value {
-    font-family: var(--serif);
-    font-weight: 800;
-    font-size: 56px;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .weight-current .value .unit {
-    font-size: 18px;
-    color: var(--text-muted);
-    margin-left: 4px;
-  }
-
-  .weight-meta {
-    display: flex;
-    gap: 24px;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-  }
-
-  .weight-meta .stat .label {
-    font-size: 9px;
-    margin-bottom: 4px;
-  }
-
-  .weight-meta .stat .num {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 18px;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .weight-meta .stat .num.down { color: var(--success); }
-  .weight-meta .stat .num.up { color: var(--danger); }
-
-  .weight-input-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 24px;
-  }
-
-  .weight-input-row input {
-    flex: 1;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-family: var(--mono);
-    font-size: 18px;
-    padding: 16px;
-    border-radius: 4px;
-    text-align: center;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .weight-input-row input:focus {
-    outline: none;
-    border-color: var(--accent);
-  }
-
-  .weight-input-row button {
-    padding: 16px 24px;
-  }
-
-  .chart-container {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 20px;
-    margin-bottom: 16px;
-  }
-
-  .chart-header {
+  .trend-card .head {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 16px;
+    margin-bottom: 4px;
   }
-
-  .chart-title {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--text-dim);
+  .trend-card .title { font-family: var(--serif); font-weight: 600; font-size: 18px; }
+  .trend-card .current {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: 22px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
   }
-
-  .range-tabs {
+  .trend-card .current .unit { font-size: 13px; color: var(--text-muted); margin-left: 2px; }
+  .trend-card .stats {
     display: flex;
-    gap: 4px;
+    gap: 16px;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+    margin-top: 4px;
+    flex-wrap: wrap;
   }
+  .trend-card .stats .down { color: var(--success); }
+  .trend-card .stats .up { color: var(--danger); }
 
+  .range-tabs { display: flex; gap: 4px; margin-bottom: 12px; }
   .range-tab {
     background: transparent;
     border: 1px solid var(--border);
@@ -555,29 +353,20 @@
     cursor: pointer;
     letter-spacing: 0.1em;
   }
+  .range-tab.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 
-  .range-tab.active {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
-  }
+  svg.chart { width: 100%; height: 160px; display: block; }
+  svg.bar-chart { width: 100%; height: 140px; display: block; }
 
-  svg.chart {
-    width: 100%;
-    height: 180px;
-    display: block;
-  }
-
-  .chart-empty {
-    text-align: center;
-    padding: 40px 20px;
+  .chart-legend {
+    display: flex;
+    gap: 14px;
+    font-size: 10px;
     color: var(--text-muted);
-    font-size: 12px;
-    font-style: italic;
-    font-family: var(--serif);
+    margin-top: 8px;
+    padding-left: 36px;
   }
-
-  /* ---- NAV ---- */
+  .chart-legend .swatch { display: inline-block; width: 10px; height: 2px; vertical-align: middle; margin-right: 4px; }
 
   nav.tabbar {
     position: fixed;
@@ -592,7 +381,6 @@
     padding: 8px 8px max(8px, env(safe-area-inset-bottom));
     z-index: 100;
   }
-
   nav.tabbar button {
     flex: 1;
     background: none;
@@ -608,19 +396,7 @@
     border-radius: 4px;
     transition: color 0.15s;
   }
-
-  nav.tabbar button.active {
-    color: var(--accent);
-  }
-
-  nav.tabbar button .num {
-    display: block;
-    font-size: 9px;
-    margin-bottom: 2px;
-    opacity: 0.6;
-  }
-
-  /* ---- TOAST ---- */
+  nav.tabbar button.active { color: var(--accent); }
 
   .toast {
     position: fixed;
@@ -631,7 +407,7 @@
     color: var(--bg);
     padding: 10px 18px;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -640,30 +416,64 @@
     transition: all 0.25s ease;
     z-index: 200;
   }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 300;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
   }
-
-  /* ---- UTILITY ---- */
-
-  .delete-link {
-    background: none;
-    border: none;
-    color: var(--danger);
-    font-family: var(--mono);
+  .modal-backdrop.show { display: flex; animation: fadeIn 0.2s ease; }
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px 8px 0 0;
+    width: 100%;
+    max-width: 600px;
+    padding: 24px 20px max(24px, env(safe-area-inset-bottom));
+    animation: slideUp 0.25s ease;
+  }
+  @keyframes slideUp { from { transform: translateY(40px); } to { transform: translateY(0); } }
+  .modal h3 { font-family: var(--serif); font-size: 20px; margin-bottom: 6px; font-weight: 600; }
+  .modal .modal-sub { font-size: 11px; color: var(--text-dim); margin-bottom: 18px; letter-spacing: 0.05em; }
+  .modal label {
+    display: block;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    cursor: pointer;
-    padding: 0;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    margin-top: 14px;
   }
+  .modal label:first-of-type { margin-top: 0; }
 
-  @media (max-height: 700px) {
-    .timer-time, .weight-current .value { font-size: 44px; }
-    .week-summary .count { font-size: 40px; }
+  .data-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px;
+    margin-bottom: 14px;
   }
+  .data-block h3 { font-family: var(--serif); font-size: 16px; margin-bottom: 6px; font-weight: 600; }
+  .data-block p { font-size: 12px; color: var(--text-dim); margin-bottom: 14px; line-height: 1.6; }
+
+  .key-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 11px;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+  }
+  .key-row:last-child { border-bottom: none; }
+  .key-row .k { color: var(--text-muted); }
+  .key-row .v { font-variant-numeric: tabular-nums; }
 </style>
 </head>
 <body>
@@ -674,103 +484,29 @@
 </header>
 
 <main>
-
-  <!-- LIFT TAB -->
-  <section class="tab active" data-tab="lift">
-    <div id="lift-view"></div>
-  </section>
-
-  <!-- FAST TAB -->
-  <section class="tab" data-tab="fast">
-    <div class="section-label">Fasting Window</div>
-    <div class="timer-display">
-      <div class="timer-status" id="fast-status">Not Fasting</div>
-      <div class="timer-time" id="fast-time">00:00:00</div>
-      <div class="timer-sub" id="fast-sub">tap start when you finish eating</div>
-      <div class="progress-track">
-        <div class="progress-fill" id="fast-progress" style="width: 0%"></div>
-      </div>
-      <div class="timer-meta">
-        <span id="fast-meta-left">Goal: 17h</span>
-        <span id="fast-meta-right">—</span>
-      </div>
-    </div>
-
-    <div class="goal-row">
-      <label>Fast Goal (hours)</label>
-      <input type="number" id="fast-goal" min="12" max="24" step="0.5">
-    </div>
-
-    <div class="button-row">
-      <button class="primary" id="fast-toggle">Start Fast</button>
-    </div>
-
-    <div class="history-section">
-      <div class="section-label">Recent Fasts</div>
-      <div id="fast-history"></div>
-    </div>
-  </section>
-
-  <!-- WEIGH TAB -->
-  <section class="tab" data-tab="weigh">
-    <div class="section-label">Today</div>
-    <div class="weight-current">
-      <div class="label">Current</div>
-      <div class="value" id="weight-current">— <span class="unit">lb</span></div>
-      <div class="weight-meta">
-        <div class="stat">
-          <div class="label">7-Day Avg</div>
-          <div class="num" id="weight-avg">—</div>
-        </div>
-        <div class="stat">
-          <div class="label">From Start</div>
-          <div class="num" id="weight-change">—</div>
-        </div>
-        <div class="stat">
-          <div class="label">Entries</div>
-          <div class="num" id="weight-entries">—</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="weight-input-row">
-      <input type="number" id="weight-input" step="0.1" placeholder="enter weight" inputmode="decimal">
-      <button class="primary" id="weight-save">Save</button>
-    </div>
-
-    <div class="chart-container">
-      <div class="chart-header">
-        <div class="chart-title">Trend</div>
-        <div class="range-tabs">
-          <button class="range-tab active" data-range="30">30D</button>
-          <button class="range-tab" data-range="90">90D</button>
-          <button class="range-tab" data-range="365">1Y</button>
-          <button class="range-tab" data-range="0">ALL</button>
-        </div>
-      </div>
-      <div id="chart-area"></div>
-    </div>
-
-    <div class="history-section">
-      <div class="section-label">Recent Entries</div>
-      <div id="weight-history"></div>
-    </div>
-  </section>
-
+  <section class="tab active" data-tab="log"><div id="log-view"></div></section>
+  <section class="tab" data-tab="trends"><div id="trends-view"></div></section>
+  <section class="tab" data-tab="data"><div id="data-view"></div></section>
 </main>
 
 <nav class="tabbar">
-  <button data-target="lift" class="active">LIFT</button>
-  <button data-target="fast">FAST</button>
-  <button data-target="weigh">WEIGH</button>
+  <button data-target="log" class="active">LOG</button>
+  <button data-target="trends">TRENDS</button>
+  <button data-target="data">DATA</button>
 </nav>
 
 <div class="toast" id="toast"></div>
 
+<div class="modal-backdrop" id="modal">
+  <div class="modal" id="modal-content"></div>
+</div>
+
+<input type="file" id="import-file" accept="application/json" style="display:none">
+
 <script>
 'use strict';
 
-/* ========== STORAGE ========== */
+/* ===== STORAGE ===== */
 const Store = {
   get(key, fallback) {
     try {
@@ -778,80 +514,86 @@ const Store = {
       return v === null ? fallback : JSON.parse(v);
     } catch { return fallback; }
   },
-  set(key, val) {
-    try { localStorage.setItem(key, JSON.stringify(val)); } catch {}
-  }
+  set(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch {} },
+  remove(key) { try { localStorage.removeItem(key); } catch {} }
 };
 
-/* ========== PROGRAM DATA ========== */
+const KEYS = ['sessions','fast','weights','activeWorkout','lastTab','weightRange'];
+
+/* ===== PROGRAM ===== */
 const PROGRAM = {
   A: {
     title: 'Workout A',
     focus: 'Push / Squat / Core',
     exercises: [
-      { name: 'Goblet Squat to Chair',    sets: '3 × 10' },
-      { name: 'Push-Ups',                 sets: '3 × max-1' },
-      { name: 'Single-Arm DB Row',        sets: '3 × 10 / side' },
-      { name: 'Glute Bridge / Hip Thrust',sets: '3 × 15' },
-      { name: 'Plank',                    sets: '3 × 30–45s' }
+      { name: 'Goblet Squat to Chair',     sets: '3 × 10' },
+      { name: 'Push-Ups',                  sets: '3 × max-1' },
+      { name: 'Single-Arm DB Row',         sets: '3 × 10 / side' },
+      { name: 'Glute Bridge / Hip Thrust', sets: '3 × 15' },
+      { name: 'Plank',                     sets: '3 × 30–45s' }
     ]
   },
   B: {
     title: 'Workout B',
     focus: 'Hinge / Pull / Core',
     exercises: [
-      { name: 'Romanian Deadlift (DB)',   sets: '3 × 10' },
-      { name: 'Reverse Lunge',            sets: '3 × 8 / side' },
-      { name: 'Overhead Press (DB)',      sets: '3 × 8–10' },
-      { name: 'Dead Bug',                 sets: '3 × 10 / side' },
-      { name: 'Side Plank',               sets: '3 × 20–30s / side' }
+      { name: 'Romanian Deadlift (DB)',  sets: '3 × 10' },
+      { name: 'Reverse Lunge',           sets: '3 × 8 / side' },
+      { name: 'Overhead Press (DB)',     sets: '3 × 8–10' },
+      { name: 'Dead Bug',                sets: '3 × 10 / side' },
+      { name: 'Side Plank',              sets: '3 × 20–30s / side' }
     ]
   }
 };
+const WEEK_GOAL = 2;
 
-const WEEK_GOAL = 2; // sessions per week target
-
-/* ========== UTILS ========== */
-function pad(n) { return String(n).padStart(2, '0'); }
+/* ===== UTILS ===== */
+const pad = n => String(n).padStart(2, '0');
 
 function fmtDuration(ms) {
-  const s = Math.floor(ms / 1000);
-  const h = Math.floor(s / 3600);
-  const m = Math.floor((s % 3600) / 60);
-  const sec = s % 60;
-  return `${pad(h)}:${pad(m)}:${pad(sec)}`;
+  const s = Math.max(0, Math.floor(ms / 1000));
+  return `${pad(Math.floor(s/3600))}:${pad(Math.floor((s%3600)/60))}:${pad(s%60)}`;
 }
-
 function fmtDurationShort(ms) {
-  const s = Math.floor(ms / 1000);
-  const h = Math.floor(s / 3600);
-  const m = Math.floor((s % 3600) / 60);
-  return `${h}h ${m}m`;
+  const s = Math.max(0, Math.floor(ms / 1000));
+  const h = Math.floor(s/3600), m = Math.floor((s%3600)/60);
+  return h === 0 ? `${m}m` : `${h}h ${m}m`;
 }
-
 function isoWeek(d) {
   d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
   const dayNum = d.getUTCDay() || 7;
   d.setUTCDate(d.getUTCDate() + 4 - dayNum);
   const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-  return `${d.getUTCFullYear()}-W${pad(weekNo)}`;
+  return `${d.getUTCFullYear()}-W${pad(Math.ceil((((d - yearStart) / 86400000) + 1) / 7))}`;
 }
-
+function weekStart(d) {
+  const day = d.getDay() || 7;
+  const s = new Date(d);
+  s.setDate(d.getDate() - (day - 1));
+  s.setHours(0, 0, 0, 0);
+  return s;
+}
 function todayISO() {
   const d = new Date();
   return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 }
-
-function fmtDate(iso) {
+function fmtDate(iso) { return new Date(iso).toLocaleDateString('en-US', { month:'short', day:'numeric' }); }
+function fmtDateLong(iso) { return new Date(iso).toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' }); }
+function fmtTime(iso) { return new Date(iso).toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' }); }
+function fmtDateTime(iso) {
   const d = new Date(iso);
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const today = new Date();
+  const isToday = d.toDateString() === today.toDateString();
+  const y = new Date(today); y.setDate(today.getDate()-1);
+  const isYest = d.toDateString() === y.toDateString();
+  const day = isToday ? 'Today' : isYest ? 'Yesterday' : d.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
+  return `${day} · ${fmtTime(iso)}`;
 }
-
-function fmtDateLong(iso) {
+function toLocalInput(iso) {
   const d = new Date(iso);
-  return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
+function fromLocalInput(str) { return new Date(str).toISOString(); }
 
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -861,131 +603,236 @@ function showToast(msg) {
   showToast._t = setTimeout(() => t.classList.remove('show'), 1800);
 }
 
-/* ========== HEADER ========== */
+/* ===== MODAL ===== */
+function openModal(html) {
+  document.getElementById('modal-content').innerHTML = html;
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
+}
+document.getElementById('modal').addEventListener('click', (e) => {
+  if (e.target.id === 'modal') closeModal();
+});
+
+/* ===== HEADER ===== */
 function updateHeader() {
-  const d = new Date();
-  const opts = { weekday: 'short', month: 'short', day: 'numeric' };
   document.getElementById('header-date').textContent =
-    d.toLocaleDateString('en-US', opts).toUpperCase();
+    new Date().toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' }).toUpperCase();
 }
 
-/* ========== TABS ========== */
+/* ===== TABS ===== */
 function setTab(name) {
-  document.querySelectorAll('.tab').forEach(t => {
-    t.classList.toggle('active', t.dataset.tab === name);
-  });
-  document.querySelectorAll('nav.tabbar button').forEach(b => {
-    b.classList.toggle('active', b.dataset.target === name);
-  });
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.querySelectorAll('nav.tabbar button').forEach(b => b.classList.toggle('active', b.dataset.target === name));
   Store.set('lastTab', name);
+  if (name === 'log') renderLog();
+  if (name === 'trends') renderTrends();
+  if (name === 'data') renderData();
 }
-
 document.querySelectorAll('nav.tabbar button').forEach(b => {
   b.addEventListener('click', () => setTab(b.dataset.target));
 });
 
-/* ========== LIFT ========== */
-function getSessions() {
-  return Store.get('sessions', []);
-}
+/* ===== DATA ACCESSORS ===== */
+const getSessions = () => Store.get('sessions', []);
+const getWeights = () => Store.get('weights', []);
+const getFastState = () => Store.get('fast', { start: null, goalHours: 17, history: [] });
 
-function thisWeekSessions() {
+function thisWeekLifts() {
   const week = isoWeek(new Date());
-  return getSessions().filter(s => isoWeek(new Date(s.date)) === week);
+  return getSessions().filter(s =>
+    ['A','B','Custom'].includes(s.type) && isoWeek(new Date(s.date)) === week
+  );
+}
+function nextSuggestedAB() {
+  const ab = getSessions().filter(s => s.type === 'A' || s.type === 'B');
+  if (ab.length === 0) return 'A';
+  return ab[ab.length - 1].type === 'A' ? 'B' : 'A';
 }
 
-function nextSuggestedWorkout() {
-  const sessions = getSessions();
-  if (sessions.length === 0) return 'A';
-  const last = sessions[sessions.length - 1];
-  return last.type === 'A' ? 'B' : 'A';
-}
+/* ===== LOG TAB ===== */
+let fastTickHandle = null;
 
-function renderLift() {
-  const view = document.getElementById('lift-view');
+function renderLog() {
+  if (fastTickHandle) { clearInterval(fastTickHandle); fastTickHandle = null; }
+  const view = document.getElementById('log-view');
   const active = Store.get('activeWorkout', null);
+  if (active) return renderActiveWorkout(view, active);
 
-  if (active) {
-    renderActiveWorkout(view, active);
-  } else {
-    renderLiftHome(view);
-  }
-}
+  const fast = getFastState();
+  const weights = getWeights();
+  const lifts = thisWeekLifts().length;
+  const todayWeight = weights.find(w => w.date === todayISO());
+  const fastElapsed = fast.start ? Date.now() - new Date(fast.start).getTime() : 0;
+  const suggested = nextSuggestedAB();
 
-function renderLiftHome(view) {
-  const weekSessions = thisWeekSessions();
-  const count = weekSessions.length;
-  const suggested = nextSuggestedWorkout();
-
-  const dotsHtml = Array.from({ length: WEEK_GOAL }, (_, i) =>
-    `<div class="dot ${i < count ? 'filled' : ''}"></div>`
-  ).join('') + (count > WEEK_GOAL
-    ? Array.from({ length: count - WEEK_GOAL }, () => '<div class="dot filled"></div>').join('')
-    : '');
-
-  let msg;
-  if (count === 0) msg = `Start with ${suggested}. The first rep is the work.`;
-  else if (count < WEEK_GOAL) msg = `${WEEK_GOAL - count} more to hit the week. Suggested: ${suggested}.`;
-  else if (count === WEEK_GOAL) msg = `Goal hit. Anything more is bonus.`;
-  else msg = `${count - WEEK_GOAL} over goal. Showing up matters.`;
-
-  const allSessions = getSessions().slice().reverse().slice(0, 10);
-  const historyHtml = allSessions.length === 0
-    ? '<div style="color: var(--text-muted); font-size: 12px; padding: 12px 0; font-style: italic; font-family: var(--serif);">No sessions yet.</div>'
-    : allSessions.map(s => `
-        <div class="history-item">
-          <span class="date">${fmtDateLong(s.date)}</span>
-          <span class="type">${s.type}</span>
-        </div>`).join('');
+  const fastLabel = fast.start
+    ? `<span class="val active">${fmtDurationShort(fastElapsed)}</span>`
+    : `<span class="val muted">—</span>`;
+  const liftsLabel = `<span class="val ${lifts >= WEEK_GOAL ? 'active' : ''}">${lifts}/${WEEK_GOAL}</span>`;
+  const weightLabel = todayWeight
+    ? `<span class="val">${todayWeight.value.toFixed(1)}</span>`
+    : `<span class="val muted">—</span>`;
 
   view.innerHTML = `
-    <div class="section-label">This Week</div>
-    <div class="week-summary">
-      <div class="label">Sessions</div>
-      <div class="count">${count}<span class="of"> / ${WEEK_GOAL}</span></div>
-      <div class="progress-dots">${dotsHtml}</div>
-      <div class="message">${msg}</div>
+    <div class="today-banner">
+      <div class="stat-pill"><div class="label">Fast</div>${fastLabel}</div>
+      <div class="stat-pill"><div class="label">Lifts wk</div>${liftsLabel}</div>
+      <div class="stat-pill"><div class="label">Weight</div>${weightLabel}</div>
     </div>
 
-    <div class="section-label">Start Session</div>
-    <div class="workout-cards">
-      ${renderWorkoutCard('A', suggested === 'A')}
-      ${renderWorkoutCard('B', suggested === 'B')}
-    </div>
-
-    <div class="history-section">
-      <div class="section-label">Recent</div>
-      ${historyHtml}
-    </div>
-  `;
-
-  view.querySelectorAll('[data-start]').forEach(btn => {
-    btn.addEventListener('click', () => startWorkout(btn.dataset.start));
-  });
-}
-
-function renderWorkoutCard(type, suggested) {
-  const w = PROGRAM[type];
-  const exercisesShort = w.exercises.map(e => e.name).join(' · ');
-  return `
-    <button class="workout-card" data-start="${type}">
-      <div class="header">
-        <div class="title">${w.title}</div>
-        <div class="badge">${suggested ? 'Suggested' : type}</div>
+    <div class="section-label">Weight</div>
+    <div class="card">
+      <div class="row">
+        <input type="number" id="weight-input" step="0.1" placeholder="enter weight (lb)" inputmode="decimal">
+        <button class="primary" id="weight-save">Save</button>
       </div>
-      <div class="focus">${w.focus}</div>
-      <div class="exercises">${exercisesShort}</div>
-    </button>
+    </div>
+
+    <div class="section-label">Move</div>
+    <div class="card">
+      <div class="button-grid">
+        <button class="move-card ${suggested==='A'?'suggested':''}" data-action="start-A">
+          <div class="title">Workout A</div>
+          <div class="sub">Push · Squat · Core</div>
+        </button>
+        <button class="move-card ${suggested==='B'?'suggested':''}" data-action="start-B">
+          <div class="title">Workout B</div>
+          <div class="sub">Hinge · Pull · Core</div>
+        </button>
+        <button class="move-card" data-action="log-walk">
+          <div class="title">Walk / Run</div>
+          <div class="sub">Log miles</div>
+        </button>
+        <button class="move-card" data-action="log-custom">
+          <div class="title">Custom</div>
+          <div class="sub">Free notes</div>
+        </button>
+      </div>
+    </div>
+
+    <div class="section-label">Fast <span class="meta">Goal ${fast.goalHours}h</span></div>
+    <div class="card">${renderFastInline(fast)}</div>
+
+    <div class="section-label">Recent</div>
+    <div class="card" style="padding: 4px 18px;">${renderRecentActivity()}</div>
+  `;
+
+  document.getElementById('weight-save').addEventListener('click', saveWeight);
+  document.getElementById('weight-input').addEventListener('keydown', e => { if (e.key === 'Enter') saveWeight(); });
+
+  view.querySelectorAll('[data-action]').forEach(b => {
+    b.addEventListener('click', () => {
+      const a = b.dataset.action;
+      if (a === 'start-A') startWorkout('A');
+      else if (a === 'start-B') startWorkout('B');
+      else if (a === 'log-walk') openWalkRunModal();
+      else if (a === 'log-custom') openCustomModal();
+    });
+  });
+
+  const fastBtn = document.getElementById('fast-toggle');
+  if (fastBtn) fastBtn.addEventListener('click', toggleFast);
+  const editStart = document.getElementById('edit-fast-start');
+  if (editStart) editStart.addEventListener('click', editFastStart);
+
+  if (fast.start) startFastTick();
+}
+
+function renderFastInline(fast) {
+  const goalMs = fast.goalHours * 3600 * 1000;
+  if (fast.start) {
+    const elapsed = Date.now() - new Date(fast.start).getTime();
+    const pct = Math.min(100, (elapsed / goalMs) * 100);
+    const remaining = goalMs - elapsed;
+    const remText = remaining > 0
+      ? `${fmtDurationShort(remaining)} to ${fast.goalHours}h goal`
+      : `+${fmtDurationShort(-remaining)} past goal`;
+    return `
+      <div class="fast-inline">
+        <div class="time-block">
+          <div class="time" id="fast-time">${fmtDuration(elapsed)}</div>
+          <div class="progress-row">
+            <div class="progress-track">
+              <div class="progress-fill ${pct>=100?'complete':''}" id="fast-progress" style="width:${pct}%"></div>
+            </div>
+            <span id="fast-remaining">${remText}</span>
+          </div>
+        </div>
+        <button class="danger" id="fast-toggle">End</button>
+      </div>
+      <div class="fast-started-row">
+        <span>Started ${fmtDateTime(fast.start)}</span>
+        <button class="edit-link" id="edit-fast-start">Edit time</button>
+      </div>
+    `;
+  }
+  return `
+    <div class="fast-inline">
+      <div class="time-block">
+        <div class="time dim">Not fasting</div>
+        <div class="progress-row">Goal: ${fast.goalHours}h · start when you finish eating</div>
+      </div>
+      <button class="primary" id="fast-toggle">Start</button>
+    </div>
   `;
 }
 
+function renderRecentActivity() {
+  const items = [];
+  getSessions().forEach(s => {
+    let detail = '—';
+    if (s.type === 'Walk/Run') detail = `${s.miles ? s.miles.toFixed(1) + ' mi' : ''}${s.duration ? ' · ' + s.duration + 'm' : ''}`.trim() || '—';
+    else if (s.type === 'Custom') detail = s.notes ? (s.notes.length > 50 ? s.notes.slice(0, 50) + '…' : s.notes) : '—';
+    items.push({ ts: s.date, type: s.type, detail });
+  });
+  getFastState().history.forEach(f => {
+    items.push({
+      ts: f.end,
+      type: 'Fast',
+      detail: fmtDurationShort(new Date(f.end) - new Date(f.start))
+    });
+  });
+  getWeights().forEach(w => {
+    items.push({ ts: w.date + 'T08:00:00', type: 'Weight', detail: w.value.toFixed(1) + ' lb' });
+  });
+
+  items.sort((a, b) => new Date(b.ts) - new Date(a.ts));
+  const recent = items.slice(0, 10);
+  if (recent.length === 0) return '<div class="empty">Nothing logged yet.</div>';
+
+  return recent.map(it => `
+    <div class="history-item">
+      <span class="date">${fmtDateLong(it.ts)}</span>
+      <span class="type">${it.type}</span>
+      <span class="detail">${it.detail}</span>
+    </div>
+  `).join('');
+}
+
+/* ===== WEIGHT ===== */
+function saveWeight() {
+  const input = document.getElementById('weight-input');
+  const v = parseFloat(input.value);
+  if (isNaN(v) || v < 50 || v > 700) { showToast('Enter a valid weight'); return; }
+  const date = todayISO();
+  const weights = getWeights().filter(w => w.date !== date);
+  weights.push({ date, value: v });
+  weights.sort((a, b) => a.date.localeCompare(b.date));
+  Store.set('weights', weights);
+  showToast('Weight saved');
+  renderLog();
+}
+
+/* ===== WORKOUTS A/B ===== */
 function startWorkout(type) {
   Store.set('activeWorkout', {
     type,
     started: new Date().toISOString(),
     completed: PROGRAM[type].exercises.map(() => false)
   });
-  renderLift();
+  renderLog();
 }
 
 function renderActiveWorkout(view, active) {
@@ -996,7 +843,7 @@ function renderActiveWorkout(view, active) {
 
   view.innerHTML = `
     <div class="section-label">In Progress</div>
-    <div class="active-workout">
+    <div class="card active-workout">
       <h2>${w.title}</h2>
       <div class="focus">${w.focus} · ${doneCount} of ${total} done</div>
       ${w.exercises.map((ex, i) => `
@@ -1025,97 +872,150 @@ function renderActiveWorkout(view, active) {
       renderActiveWorkout(view, active);
     });
   });
-
   document.getElementById('cancel-workout').addEventListener('click', () => {
     if (confirm('Cancel this workout? Progress will be lost.')) {
       Store.set('activeWorkout', null);
-      renderLift();
+      renderLog();
     }
   });
-
   document.getElementById('finish-workout').addEventListener('click', () => {
     const sessions = getSessions();
-    sessions.push({
-      type: active.type,
-      date: new Date().toISOString()
-    });
+    sessions.push({ type: active.type, date: new Date().toISOString() });
     Store.set('sessions', sessions);
     Store.set('activeWorkout', null);
     showToast(`${w.title} logged`);
-    renderLift();
+    renderLog();
   });
 }
 
-/* ========== FAST ========== */
-let fastTickHandle = null;
-
-function getFastState() {
-  return Store.get('fast', { start: null, goalHours: 17, history: [] });
+/* ===== CUSTOM WORKOUT ===== */
+function openCustomModal() {
+  openModal(`
+    <h3>Custom Workout</h3>
+    <div class="modal-sub">What did you do?</div>
+    <label>Notes</label>
+    <textarea id="custom-notes" placeholder="e.g. 30 min kettlebell flow, yard work, basketball"></textarea>
+    <label>When</label>
+    <input type="datetime-local" id="custom-when" value="${toLocalInput(new Date().toISOString())}">
+    <div class="button-row">
+      <button class="secondary" id="custom-cancel">Cancel</button>
+      <button class="primary" id="custom-save">Save</button>
+    </div>
+  `);
+  setTimeout(() => document.getElementById('custom-notes').focus(), 100);
+  document.getElementById('custom-cancel').addEventListener('click', closeModal);
+  document.getElementById('custom-save').addEventListener('click', () => {
+    const notes = document.getElementById('custom-notes').value.trim();
+    const when = document.getElementById('custom-when').value;
+    if (!notes) { showToast('Add notes first'); return; }
+    const sessions = getSessions();
+    sessions.push({
+      type: 'Custom',
+      date: when ? fromLocalInput(when) : new Date().toISOString(),
+      notes
+    });
+    Store.set('sessions', sessions);
+    closeModal();
+    showToast('Custom workout logged');
+    renderLog();
+  });
 }
 
-function saveFastState(s) { Store.set('fast', s); }
+/* ===== WALK/RUN ===== */
+function openWalkRunModal() {
+  openModal(`
+    <h3>Walk / Run</h3>
+    <div class="modal-sub">Log your distance</div>
+    <label>Miles</label>
+    <input type="number" id="wr-miles" step="0.1" inputmode="decimal" placeholder="e.g. 2.5">
+    <label>Minutes (optional)</label>
+    <input type="number" id="wr-mins" step="1" inputmode="numeric" placeholder="e.g. 28">
+    <label>When</label>
+    <input type="datetime-local" id="wr-when" value="${toLocalInput(new Date().toISOString())}">
+    <div class="button-row">
+      <button class="secondary" id="wr-cancel">Cancel</button>
+      <button class="primary" id="wr-save">Save</button>
+    </div>
+  `);
+  setTimeout(() => document.getElementById('wr-miles').focus(), 100);
+  document.getElementById('wr-cancel').addEventListener('click', closeModal);
+  document.getElementById('wr-save').addEventListener('click', () => {
+    const miles = parseFloat(document.getElementById('wr-miles').value);
+    const mins = parseInt(document.getElementById('wr-mins').value);
+    const when = document.getElementById('wr-when').value;
+    if (isNaN(miles) || miles <= 0) { showToast('Enter miles'); return; }
+    const entry = {
+      type: 'Walk/Run',
+      date: when ? fromLocalInput(when) : new Date().toISOString(),
+      miles
+    };
+    if (!isNaN(mins) && mins > 0) entry.duration = mins;
+    const sessions = getSessions();
+    sessions.push(entry);
+    Store.set('sessions', sessions);
+    closeModal();
+    showToast(`${miles.toFixed(1)} mi logged`);
+    renderLog();
+  });
+}
 
-function renderFast() {
+/* ===== FAST ===== */
+function toggleFast() {
   const s = getFastState();
-  document.getElementById('fast-goal').value = s.goalHours;
-
-  const status = document.getElementById('fast-status');
-  const time = document.getElementById('fast-time');
-  const sub = document.getElementById('fast-sub');
-  const fill = document.getElementById('fast-progress');
-  const left = document.getElementById('fast-meta-left');
-  const right = document.getElementById('fast-meta-right');
-  const btn = document.getElementById('fast-toggle');
-
-  const goalMs = s.goalHours * 3600 * 1000;
-
   if (s.start) {
-    const elapsed = Date.now() - new Date(s.start).getTime();
-    const pct = Math.min(100, (elapsed / goalMs) * 100);
-    const remaining = goalMs - elapsed;
-
-    status.textContent = pct >= 100 ? 'Goal Hit · Keep Going' : 'Fasting';
-    status.classList.add('active');
-    time.textContent = fmtDuration(elapsed);
-    time.classList.remove('dim');
-    sub.textContent = `started ${new Date(s.start).toLocaleString('en-US', { weekday: 'short', hour: 'numeric', minute: '2-digit' })}`;
-    fill.style.width = pct + '%';
-    fill.classList.toggle('complete', pct >= 100);
-    left.textContent = `Goal: ${s.goalHours}h`;
-    right.textContent = remaining > 0
-      ? `${fmtDurationShort(remaining)} to goal`
-      : `+${fmtDurationShort(-remaining)} past goal`;
-    btn.textContent = 'End Fast';
-    btn.style.background = 'var(--danger)';
+    openModal(`
+      <h3>End Fast</h3>
+      <div class="modal-sub">Adjust end time if needed (e.g. you forgot to end earlier).</div>
+      <label>Start</label>
+      <input type="datetime-local" id="end-fast-start" value="${toLocalInput(s.start)}">
+      <label>End</label>
+      <input type="datetime-local" id="end-fast-end" value="${toLocalInput(new Date().toISOString())}">
+      <div class="button-row">
+        <button class="secondary" id="end-cancel">Cancel</button>
+        <button class="primary" id="end-confirm">End Fast</button>
+      </div>
+    `);
+    document.getElementById('end-cancel').addEventListener('click', closeModal);
+    document.getElementById('end-confirm').addEventListener('click', () => {
+      const startVal = document.getElementById('end-fast-start').value;
+      const endVal = document.getElementById('end-fast-end').value;
+      if (!startVal || !endVal) { showToast('Set times'); return; }
+      const start = fromLocalInput(startVal);
+      const end = fromLocalInput(endVal);
+      if (new Date(end) <= new Date(start)) { showToast('End must be after start'); return; }
+      const fresh = getFastState();
+      fresh.history.push({ start, end, goal: fresh.goalHours });
+      fresh.start = null;
+      Store.set('fast', fresh);
+      closeModal();
+      showToast(`Fast: ${fmtDurationShort(new Date(end) - new Date(start))}`);
+      if (fastTickHandle) clearInterval(fastTickHandle);
+      renderLog();
+    });
   } else {
-    status.textContent = 'Not Fasting';
-    status.classList.remove('active');
-    time.textContent = '00:00:00';
-    time.classList.add('dim');
-    sub.textContent = 'tap start when you finish eating';
-    fill.style.width = '0%';
-    fill.classList.remove('complete');
-    left.textContent = `Goal: ${s.goalHours}h`;
-    right.textContent = '—';
-    btn.textContent = 'Start Fast';
-    btn.style.background = '';
-  }
-
-  // History
-  const hist = document.getElementById('fast-history');
-  if (s.history.length === 0) {
-    hist.innerHTML = '<div style="color: var(--text-muted); font-size: 12px; padding: 12px 0; font-style: italic; font-family: var(--serif);">No fasts logged yet.</div>';
-  } else {
-    hist.innerHTML = s.history.slice().reverse().slice(0, 8).map(f => {
-      const dur = new Date(f.end) - new Date(f.start);
-      const hours = dur / 3600 / 1000;
-      const hit = hours >= f.goal;
-      return `
-        <div class="history-item">
-          <span class="date">${fmtDateLong(f.end)}</span>
-          <span class="type" style="color: ${hit ? 'var(--success)' : 'var(--text-dim)'};">${fmtDurationShort(dur)}</span>
-        </div>`;
-    }).join('');
+    openModal(`
+      <h3>Start Fast</h3>
+      <div class="modal-sub">Use the current time, or adjust if you forgot to start earlier.</div>
+      <label>Start Time</label>
+      <input type="datetime-local" id="start-fast-time" value="${toLocalInput(new Date().toISOString())}">
+      <div class="button-row">
+        <button class="secondary" id="start-cancel">Cancel</button>
+        <button class="primary" id="start-confirm">Start Fast</button>
+      </div>
+    `);
+    document.getElementById('start-cancel').addEventListener('click', closeModal);
+    document.getElementById('start-confirm').addEventListener('click', () => {
+      const val = document.getElementById('start-fast-time').value;
+      if (!val) { showToast('Pick a time'); return; }
+      const startIso = fromLocalInput(val);
+      if (new Date(startIso) > new Date()) { showToast('Start must be in the past or now'); return; }
+      const fresh = getFastState();
+      fresh.start = startIso;
+      Store.set('fast', fresh);
+      closeModal();
+      showToast('Fast started');
+      renderLog();
+    });
   }
 }
 
@@ -1124,58 +1024,106 @@ function startFastTick() {
   fastTickHandle = setInterval(() => {
     const s = getFastState();
     if (!s.start) { clearInterval(fastTickHandle); return; }
+    const timeEl = document.getElementById('fast-time');
+    if (!timeEl) { clearInterval(fastTickHandle); return; }
     const elapsed = Date.now() - new Date(s.start).getTime();
-    document.getElementById('fast-time').textContent = fmtDuration(elapsed);
+    timeEl.textContent = fmtDuration(elapsed);
     const goalMs = s.goalHours * 3600 * 1000;
     const pct = Math.min(100, (elapsed / goalMs) * 100);
-    document.getElementById('fast-progress').style.width = pct + '%';
-    document.getElementById('fast-progress').classList.toggle('complete', pct >= 100);
-    const remaining = goalMs - elapsed;
-    document.getElementById('fast-meta-right').textContent = remaining > 0
-      ? `${fmtDurationShort(remaining)} to goal`
-      : `+${fmtDurationShort(-remaining)} past goal`;
-    if (pct >= 100) {
-      document.getElementById('fast-status').textContent = 'Goal Hit · Keep Going';
+    const fill = document.getElementById('fast-progress');
+    if (fill) {
+      fill.style.width = pct + '%';
+      fill.classList.toggle('complete', pct >= 100);
     }
+    const remaining = goalMs - elapsed;
+    const rem = document.getElementById('fast-remaining');
+    if (rem) rem.textContent = remaining > 0
+      ? `${fmtDurationShort(remaining)} to ${s.goalHours}h goal`
+      : `+${fmtDurationShort(-remaining)} past goal`;
   }, 1000);
 }
 
-document.getElementById('fast-toggle').addEventListener('click', () => {
+function editFastStart() {
   const s = getFastState();
-  if (s.start) {
-    const end = new Date().toISOString();
-    s.history.push({ start: s.start, end, goal: s.goalHours });
-    const dur = new Date(end) - new Date(s.start);
-    s.start = null;
-    saveFastState(s);
-    showToast(`Fast: ${fmtDurationShort(dur)}`);
-    renderFast();
-    if (fastTickHandle) clearInterval(fastTickHandle);
-  } else {
-    s.start = new Date().toISOString();
-    saveFastState(s);
-    renderFast();
-    startFastTick();
-    showToast('Fast started');
-  }
-});
-
-document.getElementById('fast-goal').addEventListener('change', (e) => {
-  const v = parseFloat(e.target.value);
-  if (isNaN(v) || v < 12 || v > 24) { renderFast(); return; }
-  const s = getFastState();
-  s.goalHours = v;
-  saveFastState(s);
-  renderFast();
-});
-
-/* ========== WEIGHT ========== */
-function getWeights() {
-  return Store.get('weights', []);
+  if (!s.start) return;
+  openModal(`
+    <h3>Edit Start Time</h3>
+    <div class="modal-sub">When did you actually start fasting?</div>
+    <label>Start Time</label>
+    <input type="datetime-local" id="fast-start-edit" value="${toLocalInput(s.start)}">
+    <div class="button-row">
+      <button class="secondary" id="es-cancel">Cancel</button>
+      <button class="primary" id="es-save">Save</button>
+    </div>
+  `);
+  document.getElementById('es-cancel').addEventListener('click', closeModal);
+  document.getElementById('es-save').addEventListener('click', () => {
+    const val = document.getElementById('fast-start-edit').value;
+    if (!val) { showToast('Pick a time'); return; }
+    const newIso = fromLocalInput(val);
+    if (new Date(newIso) > new Date()) { showToast('Start must be in the past'); return; }
+    const fresh = getFastState();
+    fresh.start = newIso;
+    Store.set('fast', fresh);
+    closeModal();
+    showToast('Updated');
+    renderLog();
+  });
 }
 
-function setWeights(w) { Store.set('weights', w); }
+function editFastHistory(reversedIdx) {
+  const s = getFastState();
+  const idx = s.history.length - 1 - reversedIdx;
+  const entry = s.history[idx];
+  if (!entry) return;
+  openModal(`
+    <h3>Edit Fast</h3>
+    <div class="modal-sub">Adjust times or delete.</div>
+    <label>Start</label>
+    <input type="datetime-local" id="edit-start" value="${toLocalInput(entry.start)}">
+    <label>End</label>
+    <input type="datetime-local" id="edit-end" value="${toLocalInput(entry.end)}">
+    <div class="button-row">
+      <button class="danger" id="del-fast">Delete</button>
+      <button class="primary" id="save-edit">Save</button>
+    </div>
+  `);
+  document.getElementById('save-edit').addEventListener('click', () => {
+    const start = fromLocalInput(document.getElementById('edit-start').value);
+    const end = fromLocalInput(document.getElementById('edit-end').value);
+    if (new Date(end) <= new Date(start)) { showToast('End must be after start'); return; }
+    const fresh = getFastState();
+    fresh.history[idx] = { ...entry, start, end };
+    Store.set('fast', fresh);
+    closeModal();
+    showToast('Updated');
+    renderTrends();
+  });
+  document.getElementById('del-fast').addEventListener('click', () => {
+    if (!confirm('Delete this fast entry?')) return;
+    const fresh = getFastState();
+    fresh.history.splice(idx, 1);
+    Store.set('fast', fresh);
+    closeModal();
+    showToast('Deleted');
+    renderTrends();
+  });
+}
 
+/* ===== TRENDS ===== */
+function makeWeekBuckets(count) {
+  const buckets = [];
+  const thisStart = weekStart(new Date());
+  for (let i = count - 1; i >= 0; i--) {
+    const start = new Date(thisStart);
+    start.setDate(thisStart.getDate() - i * 7);
+    const end = new Date(start);
+    end.setDate(start.getDate() + 7);
+    buckets.push({ start, end });
+  }
+  return buckets;
+}
+function fmtWeekLabel(d) { return `${d.getMonth()+1}/${d.getDate()}`; }
 function movingAvg(arr, days) {
   if (arr.length === 0) return null;
   const cutoff = new Date(arr[arr.length-1].date);
@@ -1185,77 +1133,177 @@ function movingAvg(arr, days) {
   return recent.reduce((s, w) => s + w.value, 0) / recent.length;
 }
 
-function renderWeight() {
+function renderTrends() {
+  const view = document.getElementById('trends-view');
   const weights = getWeights().slice().sort((a, b) => a.date.localeCompare(b.date));
+  const sessions = getSessions();
+  const fast = getFastState();
+
   const current = weights.length > 0 ? weights[weights.length - 1] : null;
-  const avg = movingAvg(weights, 7);
+  const avg7 = movingAvg(weights, 7);
   const change = weights.length > 1 ? current.value - weights[0].value : null;
+  const range30 = (() => {
+    if (weights.length < 2) return null;
+    const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - 30);
+    const recent = weights.filter(w => new Date(w.date) >= cutoff);
+    if (recent.length < 2) return null;
+    return recent[recent.length-1].value - recent[0].value;
+  })();
 
-  document.getElementById('weight-current').innerHTML = current
-    ? `${current.value.toFixed(1)}<span class="unit">lb</span>`
-    : `—<span class="unit">lb</span>`;
+  const buckets = makeWeekBuckets(12);
+  const liftCounts = buckets.map(wb => sessions.filter(s =>
+    ['A','B','Custom'].includes(s.type) &&
+    new Date(s.date) >= wb.start && new Date(s.date) < wb.end
+  ).length);
+  const milesPerWeek = buckets.map(wb => sessions.filter(s =>
+    s.type === 'Walk/Run' &&
+    new Date(s.date) >= wb.start && new Date(s.date) < wb.end
+  ).reduce((sum, s) => sum + (s.miles || 0), 0));
 
-  document.getElementById('weight-avg').textContent = avg ? avg.toFixed(1) : '—';
-  document.getElementById('weight-entries').textContent = weights.length || '—';
+  const totalMiles = sessions.filter(s => s.type === 'Walk/Run').reduce((s, x) => s + (x.miles || 0), 0);
+  const last7Miles = sessions.filter(s => {
+    if (s.type !== 'Walk/Run') return false;
+    return Date.now() - new Date(s.date).getTime() < 7 * 86400000;
+  }).reduce((sum, s) => sum + (s.miles || 0), 0);
+  const totalLifts = sessions.filter(s => ['A','B','Custom'].includes(s.type)).length;
 
-  const changeEl = document.getElementById('weight-change');
-  if (change === null) {
-    changeEl.textContent = '—';
-    changeEl.className = 'num';
-  } else {
-    changeEl.textContent = `${change > 0 ? '+' : ''}${change.toFixed(1)}`;
-    changeEl.className = 'num ' + (change < 0 ? 'down' : change > 0 ? 'up' : '');
-  }
+  const fastHist = fast.history.slice(-14);
+  const avgFast = fastHist.length > 0
+    ? fastHist.reduce((s, f) => s + (new Date(f.end) - new Date(f.start)), 0) / fastHist.length
+    : 0;
 
-  const range = parseInt(Store.get('weightRange', '30'));
-  renderChart(weights, range);
+  view.innerHTML = `
+    <div class="section-label">Weight</div>
+    <div class="trend-card">
+      <div class="head">
+        <div class="title">Weight</div>
+        <div class="current">${current ? current.value.toFixed(1) : '—'}<span class="unit">lb</span></div>
+      </div>
+      <div class="stats">
+        <span>7d avg: <strong>${avg7 ? avg7.toFixed(1) : '—'}</strong></span>
+        <span>Total: <strong class="${change && change < 0 ? 'down' : change && change > 0 ? 'up' : ''}">${change===null?'—':(change>0?'+':'')+change.toFixed(1)}</strong></span>
+        <span>30d: <strong class="${range30 && range30 < 0 ? 'down' : range30 && range30 > 0 ? 'up' : ''}">${range30===null?'—':(range30>0?'+':'')+range30.toFixed(1)}</strong></span>
+      </div>
+      <div class="range-tabs" id="weight-ranges">
+        <button class="range-tab" data-range="30">30D</button>
+        <button class="range-tab" data-range="90">90D</button>
+        <button class="range-tab" data-range="365">1Y</button>
+        <button class="range-tab" data-range="0">ALL</button>
+      </div>
+      <div id="weight-chart"></div>
+    </div>
 
-  // history
-  const hist = document.getElementById('weight-history');
-  const recent = weights.slice().reverse().slice(0, 10);
-  hist.innerHTML = recent.length === 0
-    ? '<div style="color: var(--text-muted); font-size: 12px; padding: 12px 0; font-style: italic; font-family: var(--serif);">No entries yet.</div>'
-    : recent.map(w => `
-        <div class="history-item">
-          <span class="date">${fmtDateLong(w.date)}</span>
-          <span><span class="type">${w.value.toFixed(1)} lb</span>
-            <button class="delete-link" data-del="${w.date}" style="margin-left: 12px;">×</button>
-          </span>
-        </div>`).join('');
+    <div class="section-label">Lifting</div>
+    <div class="trend-card">
+      <div class="head">
+        <div class="title">Sessions / Week</div>
+        <div class="current">${liftCounts[liftCounts.length-1]}<span class="unit">this wk</span></div>
+      </div>
+      <div class="stats">
+        <span>Goal: <strong>${WEEK_GOAL}</strong></span>
+        <span>12w avg: <strong>${(liftCounts.reduce((s,c)=>s+c,0)/liftCounts.length).toFixed(1)}</strong></span>
+        <span>Total: <strong>${totalLifts}</strong></span>
+      </div>
+      <div id="sessions-chart"></div>
+    </div>
 
-  hist.querySelectorAll('[data-del]').forEach(b => {
+    <div class="section-label">Cardio</div>
+    <div class="trend-card">
+      <div class="head">
+        <div class="title">Miles / Week</div>
+        <div class="current">${milesPerWeek[milesPerWeek.length-1].toFixed(1)}<span class="unit">mi</span></div>
+      </div>
+      <div class="stats">
+        <span>Last 7d: <strong>${last7Miles.toFixed(1)} mi</strong></span>
+        <span>12w avg: <strong>${(milesPerWeek.reduce((s,c)=>s+c,0)/milesPerWeek.length).toFixed(1)} mi</strong></span>
+        <span>Total: <strong>${totalMiles.toFixed(1)} mi</strong></span>
+      </div>
+      <div id="miles-chart"></div>
+    </div>
+
+    <div class="section-label">Fasting</div>
+    <div class="trend-card">
+      <div class="head">
+        <div class="title">Fast Duration</div>
+        <div class="current">${fastHist.length>0?fmtDurationShort(new Date(fastHist[fastHist.length-1].end) - new Date(fastHist[fastHist.length-1].start)):'—'}<span class="unit">last</span></div>
+      </div>
+      <div class="stats">
+        <span>Goal: <strong>${fast.goalHours}h</strong></span>
+        <span>Avg: <strong>${avgFast > 0 ? fmtDurationShort(avgFast) : '—'}</strong></span>
+        <span>Logged: <strong>${fast.history.length}</strong></span>
+      </div>
+      <div id="fast-chart"></div>
+      <div style="margin-top:18px;">
+        <div class="section-label" style="margin-bottom:4px;">Recent Fasts <span class="meta">tap to edit</span></div>
+        <div id="fast-history-list"></div>
+      </div>
+    </div>
+  `;
+
+  const wRange = Store.get('weightRange', '30');
+  document.querySelectorAll('#weight-ranges .range-tab').forEach(b => {
+    b.classList.toggle('active', b.dataset.range === String(wRange));
     b.addEventListener('click', () => {
-      if (!confirm('Delete this entry?')) return;
-      const w = getWeights().filter(x => x.date !== b.dataset.del);
-      setWeights(w);
-      renderWeight();
+      Store.set('weightRange', b.dataset.range);
+      renderTrends();
     });
   });
+
+  renderLineChart('weight-chart', weights, parseInt(wRange));
+  renderBarChart('sessions-chart', buckets.map((wb, i) => ({
+    label: fmtWeekLabel(wb.start), value: liftCounts[i]
+  })), { goal: WEEK_GOAL, unit: '' });
+  renderBarChart('miles-chart', buckets.map((wb, i) => ({
+    label: fmtWeekLabel(wb.start), value: milesPerWeek[i]
+  })), { unit: 'mi', decimals: 1 });
+  renderBarChart('fast-chart', fastHist.map(f => ({
+    label: fmtDate(f.end),
+    value: (new Date(f.end) - new Date(f.start)) / 3600 / 1000
+  })), { goal: fast.goalHours, unit: 'h', decimals: 1 });
+
+  const list = document.getElementById('fast-history-list');
+  if (fast.history.length === 0) {
+    list.innerHTML = '<div class="empty">No fasts logged.</div>';
+  } else {
+    list.innerHTML = fast.history.slice().reverse().slice(0, 10).map((f, i) => {
+      const dur = new Date(f.end) - new Date(f.start);
+      const hours = dur / 3600 / 1000;
+      const hit = hours >= (f.goal || 17);
+      return `
+        <div class="history-item" data-fast-i="${i}" style="cursor:pointer;">
+          <span class="date">${fmtDateLong(f.end)}</span>
+          <span class="type" style="color: ${hit ? 'var(--success)' : 'var(--text-dim)'};">${fmtDurationShort(dur)}</span>
+          <span class="detail" style="color:var(--text-muted);font-size:10px;">${fmtTime(f.start)} → ${fmtTime(f.end)}</span>
+        </div>`;
+    }).join('');
+    list.querySelectorAll('[data-fast-i]').forEach(el => {
+      el.addEventListener('click', () => editFastHistory(parseInt(el.dataset.fastI)));
+    });
+  }
 }
 
-function renderChart(weights, days) {
-  const area = document.getElementById('chart-area');
+function renderLineChart(elId, weights, days) {
+  const el = document.getElementById(elId);
   let data = weights;
   if (days > 0 && weights.length > 0) {
     const cutoff = new Date();
     cutoff.setDate(cutoff.getDate() - days);
     data = weights.filter(w => new Date(w.date) >= cutoff);
   }
-
   if (data.length < 2) {
-    area.innerHTML = '<div class="chart-empty">need 2+ entries to draw a trend</div>';
+    el.innerHTML = '<div class="empty">need 2+ entries</div>';
     return;
   }
 
-  const W = 560, H = 180, P = { top: 10, right: 14, bottom: 22, left: 36 };
+  const W = 560, H = 160, P = { top: 10, right: 14, bottom: 22, left: 36 };
   const innerW = W - P.left - P.right;
   const innerH = H - P.top - P.bottom;
 
   const vals = data.map(d => d.value);
   let min = Math.min(...vals);
   let max = Math.max(...vals);
-  const pad = Math.max(1, (max - min) * 0.15);
-  min -= pad; max += pad;
+  const padR = Math.max(1, (max - min) * 0.15);
+  min -= padR; max += padR;
 
   const x0 = new Date(data[0].date).getTime();
   const x1 = new Date(data[data.length-1].date).getTime();
@@ -1264,102 +1312,228 @@ function renderChart(weights, days) {
   const xScale = t => P.left + ((t - x0) / xRange) * innerW;
   const yScale = v => P.top + (1 - (v - min) / (max - min)) * innerH;
 
-  // 7-day moving average series
   const avgData = data.map((d, i) => {
     const start = Math.max(0, i - 6);
     const slice = data.slice(start, i + 1);
-    const a = slice.reduce((s, x) => s + x.value, 0) / slice.length;
-    return { date: d.date, value: a };
+    return { date: d.date, value: slice.reduce((s, x) => s + x.value, 0) / slice.length };
   });
 
-  const pointsLine = data.map(d => `${xScale(new Date(d.date).getTime())},${yScale(d.value)}`).join(' ');
+  const dailyLine = data.map(d => `${xScale(new Date(d.date).getTime())},${yScale(d.value)}`).join(' ');
   const avgLine = avgData.map(d => `${xScale(new Date(d.date).getTime())},${yScale(d.value)}`).join(' ');
-
   const dots = data.map(d => `<circle cx="${xScale(new Date(d.date).getTime())}" cy="${yScale(d.value)}" r="2" fill="var(--text-muted)" />`).join('');
 
-  // y axis labels
   const yTicks = [min + (max-min)*0.1, (min+max)/2, max - (max-min)*0.1];
   const yLabels = yTicks.map(v => `
-    <text x="${P.left - 6}" y="${yScale(v) + 3}" text-anchor="end" fill="var(--text-muted)" font-size="9" font-family="var(--mono)">${v.toFixed(0)}</text>
+    <text x="${P.left - 6}" y="${yScale(v) + 3}" text-anchor="end" fill="var(--text-muted)" font-size="9" font-family="JetBrains Mono">${v.toFixed(0)}</text>
     <line x1="${P.left}" x2="${W - P.right}" y1="${yScale(v)}" y2="${yScale(v)}" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="2 3" />
   `).join('');
 
-  // x axis labels (first, middle, last)
   const xLabels = [data[0], data[Math.floor(data.length/2)], data[data.length-1]].map(d => {
     const x = xScale(new Date(d.date).getTime());
-    return `<text x="${x}" y="${H - 6}" text-anchor="middle" fill="var(--text-muted)" font-size="9" font-family="var(--mono)">${fmtDate(d.date)}</text>`;
+    return `<text x="${x}" y="${H - 6}" text-anchor="middle" fill="var(--text-muted)" font-size="9" font-family="JetBrains Mono">${fmtDate(d.date)}</text>`;
   }).join('');
 
-  area.innerHTML = `
+  el.innerHTML = `
     <svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
       ${yLabels}
-      <polyline points="${pointsLine}" fill="none" stroke="var(--text-muted)" stroke-width="1" stroke-opacity="0.6" />
+      <polyline points="${dailyLine}" fill="none" stroke="var(--text-muted)" stroke-width="1" stroke-opacity="0.6" />
       ${dots}
       <polyline points="${avgLine}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
       ${xLabels}
     </svg>
-    <div style="display: flex; gap: 16px; font-size: 10px; color: var(--text-muted); margin-top: 8px; padding-left: 36px;">
-      <span><span style="display: inline-block; width: 10px; height: 2px; background: var(--accent); vertical-align: middle; margin-right: 4px;"></span>7d avg</span>
-      <span><span style="display: inline-block; width: 10px; height: 1px; background: var(--text-muted); vertical-align: middle; margin-right: 4px;"></span>daily</span>
+    <div class="chart-legend">
+      <span><span class="swatch" style="background:var(--accent);"></span>7d avg</span>
+      <span><span class="swatch" style="background:var(--text-muted);"></span>daily</span>
     </div>
   `;
 }
 
-document.getElementById('weight-save').addEventListener('click', () => {
-  const input = document.getElementById('weight-input');
-  const v = parseFloat(input.value);
-  if (isNaN(v) || v < 50 || v > 700) {
-    showToast('Enter a valid weight');
+function renderBarChart(elId, data, opts = {}) {
+  const el = document.getElementById(elId);
+  if (!data || data.length === 0 || data.every(d => d.value === 0)) {
+    el.innerHTML = '<div class="empty">no data yet</div>';
     return;
   }
-  const date = todayISO();
-  const weights = getWeights().filter(w => w.date !== date);
-  weights.push({ date, value: v });
-  setWeights(weights);
-  input.value = '';
-  showToast('Saved');
-  renderWeight();
-});
+  const { goal, unit = '', decimals = 0 } = opts;
+  const W = 560, H = 140, P = { top: 14, right: 14, bottom: 22, left: 32 };
+  const innerW = W - P.left - P.right;
+  const innerH = H - P.top - P.bottom;
 
-document.getElementById('weight-input').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') document.getElementById('weight-save').click();
-});
+  const max = Math.max(...data.map(d => d.value), goal || 0, 1) * 1.15;
+  const barGap = 3;
+  const barW = (innerW - barGap * (data.length - 1)) / data.length;
 
-document.querySelectorAll('.range-tab').forEach(b => {
-  b.addEventListener('click', () => {
-    document.querySelectorAll('.range-tab').forEach(x => x.classList.remove('active'));
-    b.classList.add('active');
-    Store.set('weightRange', b.dataset.range);
-    renderWeight();
-  });
-});
+  const bars = data.map((d, i) => {
+    const x = P.left + i * (barW + barGap);
+    const h = (d.value / max) * innerH;
+    const y = P.top + innerH - h;
+    const isLast = i === data.length - 1;
+    return `<rect x="${x}" y="${y}" width="${barW}" height="${Math.max(h, 1)}" fill="${isLast ? 'var(--accent)' : 'var(--accent-dim)'}" rx="1" />`;
+  }).join('');
 
-/* ========== INIT ========== */
-function init() {
-  updateHeader();
+  let goalLine = '';
+  if (goal !== undefined && goal !== null) {
+    const y = P.top + innerH - (goal / max) * innerH;
+    goalLine = `
+      <line x1="${P.left}" x2="${W - P.right}" y1="${y}" y2="${y}" stroke="var(--success)" stroke-width="1" stroke-dasharray="3 3" stroke-opacity="0.7" />
+      <text x="${W - P.right - 4}" y="${y - 3}" text-anchor="end" fill="var(--success)" font-size="9" font-family="JetBrains Mono">goal ${goal}${unit}</text>
+    `;
+  }
 
-  // Restore last tab
-  const last = Store.get('lastTab', 'lift');
-  setTab(last);
+  const labelIdx = [0, Math.floor(data.length / 2), data.length - 1];
+  const xLabels = labelIdx.map(i => {
+    if (i >= data.length) return '';
+    const x = P.left + i * (barW + barGap) + barW / 2;
+    return `<text x="${x}" y="${H - 6}" text-anchor="middle" fill="var(--text-muted)" font-size="9" font-family="JetBrains Mono">${data[i].label}</text>`;
+  }).join('');
 
-  // Restore weight range
-  const range = Store.get('weightRange', '30');
-  document.querySelectorAll('.range-tab').forEach(b => {
-    b.classList.toggle('active', b.dataset.range === String(range));
-  });
+  const yLabel = `<text x="${P.left - 4}" y="${P.top + 8}" text-anchor="end" fill="var(--text-muted)" font-size="9" font-family="JetBrains Mono">${max.toFixed(decimals)}${unit}</text>`;
 
-  renderLift();
-  renderFast();
-  renderWeight();
-
-  // Start fast tick if fasting
-  const s = getFastState();
-  if (s.start) startFastTick();
-
-  // Keep header date fresh
-  setInterval(updateHeader, 60000);
+  el.innerHTML = `
+    <svg class="bar-chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+      ${yLabel}
+      ${goalLine}
+      ${bars}
+      ${xLabels}
+    </svg>
+  `;
 }
 
+/* ===== DATA TAB ===== */
+function renderData() {
+  const view = document.getElementById('data-view');
+  const fast = getFastState();
+  const sessions = getSessions();
+  const weights = getWeights();
+  const totalSize = KEYS.reduce((sum, k) => {
+    const v = localStorage.getItem(k);
+    return sum + (v ? v.length : 0);
+  }, 0);
+
+  view.innerHTML = `
+    <div class="section-label">Settings</div>
+    <div class="data-block">
+      <h3>Fast Goal</h3>
+      <p>Target hours per fast. Used for the progress bar and goal lines on the trends chart.</p>
+      <div class="row">
+        <input type="number" id="fast-goal-input" min="12" max="24" step="0.5" value="${fast.goalHours}">
+        <button class="primary" id="save-goal">Save</button>
+      </div>
+    </div>
+
+    <div class="section-label">Backup</div>
+    <div class="data-block">
+      <h3>Export</h3>
+      <p>Download everything as a single JSON file. Keep it as a backup, move it to another device, or just hold onto your data for the future.</p>
+      <button class="primary" id="export-btn">Download JSON</button>
+    </div>
+
+    <div class="data-block">
+      <h3>Import</h3>
+      <p>Restore from a JSON backup. <strong>This replaces all current data.</strong></p>
+      <button class="secondary" id="import-btn">Choose File</button>
+    </div>
+
+    <div class="section-label">Storage</div>
+    <div class="data-block">
+      <h3>Where Your Data Lives</h3>
+      <p>Everything is stored in your browser's <strong>localStorage</strong> on this device. Nothing is sent anywhere. Switching browsers, devices, or clearing site data starts you fresh. Export regularly if that matters to you.</p>
+      <div class="key-row"><span class="k">Sessions (workouts, walks)</span><span class="v">${sessions.length}</span></div>
+      <div class="key-row"><span class="k">Weight entries</span><span class="v">${weights.length}</span></div>
+      <div class="key-row"><span class="k">Fasts logged</span><span class="v">${fast.history.length}</span></div>
+      <div class="key-row"><span class="k">Total storage</span><span class="v">${(totalSize / 1024).toFixed(1)} KB</span></div>
+    </div>
+
+    <div class="section-label">Danger</div>
+    <div class="data-block">
+      <h3>Wipe All Data</h3>
+      <p>Erase everything. Export first if you want a backup.</p>
+      <button class="danger" id="wipe-btn">Wipe Everything</button>
+    </div>
+
+    <div class="data-block" style="border:none;background:none;text-align:center;padding-top:0;margin-top:8px;">
+      <p style="margin:0;font-style:italic;font-family:var(--serif);color:var(--text-muted);">LOG · v2</p>
+    </div>
+  `;
+
+  document.getElementById('save-goal').addEventListener('click', () => {
+    const v = parseFloat(document.getElementById('fast-goal-input').value);
+    if (isNaN(v) || v < 12 || v > 24) { showToast('Use 12–24 hours'); return; }
+    const f = getFastState();
+    f.goalHours = v;
+    Store.set('fast', f);
+    showToast('Goal saved');
+  });
+  document.getElementById('export-btn').addEventListener('click', exportData);
+  document.getElementById('import-btn').addEventListener('click', () => document.getElementById('import-file').click());
+  document.getElementById('wipe-btn').addEventListener('click', wipeData);
+}
+
+function exportData() {
+  const data = {};
+  KEYS.forEach(k => {
+    const v = localStorage.getItem(k);
+    if (v !== null) {
+      try { data[k] = JSON.parse(v); } catch { data[k] = v; }
+    }
+  });
+  const out = {
+    meta: { app: 'LOG', version: 2, exportedAt: new Date().toISOString() },
+    data
+  };
+  const blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `log-backup-${todayISO()}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Exported');
+}
+
+document.getElementById('import-file').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const parsed = JSON.parse(reader.result);
+      const data = parsed.data || parsed;
+      if (!confirm('This will replace ALL current data. Continue?')) {
+        e.target.value = '';
+        return;
+      }
+      KEYS.forEach(k => {
+        if (data[k] !== undefined) Store.set(k, data[k]);
+      });
+      showToast('Imported');
+      renderLog();
+      renderData();
+    } catch {
+      showToast('Invalid file');
+    }
+    e.target.value = '';
+  };
+  reader.readAsText(file);
+});
+
+function wipeData() {
+  if (!confirm('Erase ALL data? This cannot be undone.')) return;
+  if (!confirm('Really sure? Last chance.')) return;
+  KEYS.forEach(k => Store.remove(k));
+  showToast('Wiped');
+  renderLog();
+  renderData();
+}
+
+/* ===== INIT ===== */
+function init() {
+  updateHeader();
+  setTab(Store.get('lastTab', 'log'));
+  setInterval(updateHeader, 60000);
+}
 init();
 </script>
 
