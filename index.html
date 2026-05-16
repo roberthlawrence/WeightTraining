@@ -9,7 +9,7 @@
 <title>LOG</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Monoton&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #14110F;
@@ -23,8 +23,15 @@
     --accent-dim: #8A6224;
     --danger: #C45842;
     --success: #7FA86B;
+    /* retro accents */
+    --pink: #FF3D7F;
+    --magenta: #FF006E;
+    --cyan: #4ECDC4;
+    --neon: #FFE66D;
+    --purple: #B388EB;
     --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
     --serif: 'Fraunces', Georgia, serif;
+    --retro: 'Monoton', 'Fraunces', serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -61,29 +68,19 @@
     font-size: 28px;
     letter-spacing: -0.02em;
   }
-
   header h1 .dot { color: var(--accent); }
-
-  header .date {
-    font-size: 11px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
+  header .date { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
 
   main {
-    padding: 20px 20px 100px;
+    padding: 0 20px 100px;
     max-width: 640px;
     margin: 0 auto;
   }
+  main > section { padding-top: 20px; }
 
   .tab { display: none; }
   .tab.active { display: block; animation: fadeIn 0.25s ease; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
   .section-label {
     font-size: 10px;
@@ -105,6 +102,54 @@
     margin-bottom: 18px;
   }
 
+  /* ===== SYNTHWAVE HERO ===== */
+  .hero {
+    position: relative;
+    margin: 0 -20px 18px;
+    height: 140px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-title {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: var(--retro);
+    font-size: 28px;
+    letter-spacing: 0.1em;
+    color: var(--neon);
+    text-shadow:
+      0 0 8px rgba(255, 230, 109, 0.6),
+      0 0 16px rgba(255, 61, 127, 0.4),
+      2px 2px 0 rgba(255, 0, 110, 0.5);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .hero-quote {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8), 0 0 8px rgba(255, 61, 127, 0.3);
+    padding: 0 20px;
+    z-index: 2;
+    letter-spacing: 0.02em;
+  }
+
+  /* ===== TODAY STATS ===== */
   .today-banner {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -133,11 +178,103 @@
     font-variant-numeric: tabular-nums;
   }
   .stat-pill .val.active { color: var(--accent); }
+  .stat-pill .val.val-fast { color: #B388EB; }
+  .stat-pill .val.val-weight { color: #FF3D7F; }
   .stat-pill .val.muted { color: var(--text-muted); }
 
+  /* ===== BADGES ===== */
+  .badges-strip {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 4px 14px;
+    margin: 0 -20px 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+    scrollbar-width: none;
+  }
+  .badges-strip::-webkit-scrollbar { display: none; }
+
+  .badge {
+    flex: 0 0 auto;
+    width: 76px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .badge:active { transform: scale(0.95); }
+  .badge-circle {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border: 2px solid var(--badge-color, var(--accent));
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04),
+      inset 0 0 12px rgba(0,0,0,0.4);
+  }
+  .badge.earned .badge-circle {
+    background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--badge-color) 25%, transparent), var(--surface) 70%);
+    box-shadow:
+      0 0 12px color-mix(in srgb, var(--badge-color) 40%, transparent),
+      inset 0 0 12px rgba(0,0,0,0.3);
+  }
+  .badge.locked .badge-circle {
+    filter: grayscale(0.8);
+    opacity: 0.35;
+  }
+  .badge-icon {
+    font-family: var(--retro);
+    font-size: 14px;
+    color: var(--badge-color, var(--accent));
+    letter-spacing: 0.05em;
+    line-height: 1;
+    text-align: center;
+  }
+  .badge-icon.tall { font-size: 18px; }
+  .badge-icon.short { font-size: 11px; }
+  .badge-name {
+    font-size: 9px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    height: 20px;
+  }
+  .badge.earned .badge-name { color: var(--text-dim); }
+  .badge-count-display {
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    cursor: pointer;
+    flex: 0 0 auto;
+    width: 76px;
+    height: 88px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
+  .badge-count-display strong {
+    font-family: var(--retro);
+    font-size: 16px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== INPUTS ===== */
   .row { display: flex; gap: 10px; align-items: center; }
 
-  input[type="number"], input[type="text"], input[type="datetime-local"], textarea {
+  input[type="number"], input[type="text"], textarea {
     background: var(--bg);
     border: 1px solid var(--border);
     color: var(--text);
@@ -166,10 +303,18 @@
   button.primary { background: var(--accent); color: var(--bg); }
   button.primary:active { background: #C8881F; transform: scale(0.98); }
   button.primary:disabled { background: var(--surface-2); color: var(--text-muted); cursor: not-allowed; }
+  button.primary.weight { background: #FF3D7F; color: #fff; }
+  button.primary.weight:active { background: #E12668; }
+  button.primary.cardio { background: #4ECDC4; color: #14110F; }
+  button.primary.cardio:active { background: #2CA89F; }
+  button.primary.fast   { background: #B388EB; color: #14110F; }
+  button.primary.fast:active { background: #9764D6; }
   button.secondary { background: transparent; color: var(--text-dim); border: 1px solid var(--border); }
   button.secondary:active { background: var(--surface-2); }
   button.danger { background: transparent; color: var(--danger); border: 1px solid var(--danger); }
   button.danger:active { background: rgba(196, 88, 66, 0.15); }
+  button.danger.fast { color: #B388EB; border-color: #B388EB; }
+  button.danger.fast:active { background: rgba(179, 136, 235, 0.15); }
 
   .button-grid {
     display: grid;
@@ -180,25 +325,24 @@
   .move-card {
     background: var(--surface-2);
     border: 1px solid var(--border);
+    border-top: 3px solid var(--type-color, var(--border));
     border-radius: 4px;
-    padding: 14px 12px;
+    padding: 12px 12px 14px;
     cursor: pointer;
     text-align: left;
     color: inherit;
     font: inherit;
     transition: all 0.15s;
   }
+  .move-card.type-lift   { --type-color: #E8A33D; }
+  .move-card.type-cardio { --type-color: #4ECDC4; }
   .move-card:active { transform: scale(0.97); background: var(--bg); }
-  .move-card .title {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 16px;
-    margin-bottom: 2px;
-  }
+  .move-card .title { font-family: var(--serif); font-weight: 600; font-size: 16px; margin-bottom: 2px; color: var(--type-color, var(--text)); }
   .move-card .sub { font-size: 10px; color: var(--text-muted); letter-spacing: 0.05em; }
   .move-card.suggested { border-color: var(--accent-dim); }
-  .move-card.suggested .title { color: var(--accent); }
+  .move-card.suggested .title { color: #FFE66D; }
 
+  /* ===== FAST INLINE ===== */
   .fast-inline { display: flex; align-items: center; gap: 14px; }
   .fast-inline .time-block { flex: 1; min-width: 0; }
   .fast-inline .time {
@@ -211,19 +355,8 @@
   .fast-inline .time.dim { color: var(--text-muted); }
   .fast-inline .progress-row { margin-top: 8px; font-size: 10px; color: var(--text-muted); letter-spacing: 0.05em; }
 
-  .progress-track {
-    height: 3px;
-    background: var(--border);
-    border-radius: 2px;
-    margin: 8px 0;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: var(--accent);
-    transition: width 0.5s ease;
-    border-radius: 2px;
-  }
+  .progress-track { height: 3px; background: var(--border); border-radius: 2px; margin: 8px 0; overflow: hidden; }
+  .progress-fill { height: 100%; background: #B388EB; transition: width 0.5s ease; border-radius: 2px; }
   .progress-fill.complete { background: var(--success); }
 
   .fast-started-row {
@@ -236,11 +369,10 @@
     font-size: 11px;
     color: var(--text-dim);
   }
-
   .edit-link {
     background: none;
     border: none;
-    color: var(--accent);
+    color: #B388EB;
     font-family: var(--mono);
     font-size: 10px;
     text-transform: uppercase;
@@ -249,6 +381,7 @@
     padding: 4px 0;
   }
 
+  /* ===== ACTIVE WORKOUT ===== */
   .active-workout h2 { font-family: var(--serif); font-size: 22px; margin-bottom: 4px; }
   .active-workout .focus { font-size: 11px; color: var(--text-dim); margin-bottom: 16px; letter-spacing: 0.05em; }
 
@@ -284,19 +417,81 @@
   .button-row { display: flex; gap: 10px; margin-top: 18px; }
   .button-row button { flex: 1; }
 
-  .history-item {
+  /* ===== RECENT (grouped by day) ===== */
+  .day-group { margin-bottom: 10px; }
+  .day-group:last-child { margin-bottom: 0; }
+  .day-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 11px 0;
+    align-items: baseline;
+    padding: 14px 0 8px;
     border-bottom: 1px solid var(--border);
-    font-size: 12px;
-    gap: 12px;
+    margin-bottom: 6px;
   }
-  .history-item:last-child { border-bottom: none; }
-  .history-item .date { color: var(--text-dim); white-space: nowrap; font-size: 11px; }
-  .history-item .type { color: var(--accent); font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
-  .history-item .detail { color: var(--text); font-size: 12px; flex: 1; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .day-group:first-child .day-header { padding-top: 6px; }
+  .day-label {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    color: var(--text);
+  }
+  .day-label.today { color: var(--accent); }
+  .day-meta {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+  }
+  .day-rest {
+    padding: 8px 0 4px 12px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .recent-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 4px 10px 11px;
+    border-left: 3px solid var(--type-color, var(--accent));
+    margin-bottom: 2px;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-radius: 0 2px 2px 0;
+  }
+  .recent-row:active { background: var(--surface-2); }
+  .recent-row.type-lift   { --type-color: #E8A33D; }
+  .recent-row.type-cardio { --type-color: #4ECDC4; }
+  .recent-row.type-weight { --type-color: #FF3D7F; }
+  .recent-row.type-fast   { --type-color: #B388EB; }
+
+  .recent-type {
+    color: var(--type-color);
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    min-width: 58px;
+    flex-shrink: 0;
+  }
+  .recent-detail {
+    flex: 1;
+    font-size: 12px;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .recent-time {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
 
   .empty {
     color: var(--text-muted);
@@ -307,6 +502,7 @@
     text-align: center;
   }
 
+  /* ===== TRENDS ===== */
   .trend-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -368,6 +564,7 @@
   }
   .chart-legend .swatch { display: inline-block; width: 10px; height: 2px; vertical-align: middle; margin-right: 4px; }
 
+  /* ===== NAV ===== */
   nav.tabbar {
     position: fixed;
     bottom: 0;
@@ -398,6 +595,7 @@
   }
   nav.tabbar button.active { color: var(--accent); }
 
+  /* ===== TOAST ===== */
   .toast {
     position: fixed;
     bottom: 90px;
@@ -415,9 +613,34 @@
     pointer-events: none;
     transition: all 0.25s ease;
     z-index: 200;
+    max-width: calc(100% - 40px);
+    text-align: center;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.achievement {
+    background: var(--pink);
+    color: white;
+    border: 1px solid var(--neon);
+    box-shadow: 0 0 20px rgba(255, 61, 127, 0.5), 0 4px 12px rgba(0,0,0,0.5);
+    padding: 14px 22px;
+  }
+  .toast.achievement .ach-label {
+    font-family: var(--retro);
+    font-size: 10px;
+    display: block;
+    color: var(--neon);
+    margin-bottom: 4px;
+    letter-spacing: 0.2em;
+  }
+  .toast.achievement .ach-name {
+    font-family: var(--serif);
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-style: italic;
+  }
 
+  /* ===== MODAL ===== */
   .modal-backdrop {
     position: fixed;
     inset: 0;
@@ -438,6 +661,8 @@
     max-width: 600px;
     padding: 24px 20px max(24px, env(safe-area-inset-bottom));
     animation: slideUp 0.25s ease;
+    max-height: 90vh;
+    overflow-y: auto;
   }
   @keyframes slideUp { from { transform: translateY(40px); } to { transform: translateY(0); } }
   .modal h3 { font-family: var(--serif); font-size: 20px; margin-bottom: 6px; font-weight: 600; }
@@ -453,6 +678,130 @@
   }
   .modal label:first-of-type { margin-top: 0; }
 
+  /* ===== WHEEL DATE/TIME PICKER ===== */
+  .dt-picker {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+  .dt-display {
+    text-align: center;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--accent);
+    padding: 8px 0 14px;
+    letter-spacing: 0.01em;
+  }
+  .dt-wheels {
+    position: relative;
+    display: flex;
+    height: 144px; /* 4 items visible, item = 36px */
+    background: var(--surface);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .dt-indicator {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    height: 36px;
+    top: 54px; /* (144 - 36) / 2 */
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--accent);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .dt-wheel {
+    flex: 1;
+    height: 100%;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    text-align: center;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    z-index: 2;
+    mask-image: linear-gradient(to bottom, transparent 0, black 36px, black 108px, transparent 144px);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, black 36px, black 108px, transparent 144px);
+  }
+  .dt-wheel::-webkit-scrollbar { display: none; }
+  .dt-wheel-spacer { height: 54px; pointer-events: none; }
+  .dt-item {
+    height: 36px;
+    line-height: 36px;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.15s, font-weight 0.15s;
+    padding: 0 4px;
+    white-space: nowrap;
+  }
+  .dt-item.selected {
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .dt-now-btn {
+    margin-top: 12px;
+    width: 100%;
+    padding: 10px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .dt-now-btn:active { background: var(--bg); color: var(--accent); }
+
+  /* ===== ACHIEVEMENTS GRID MODAL ===== */
+  .achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .achievement-grid .badge {
+    width: 100%;
+  }
+  .ach-detail {
+    text-align: center;
+    padding: 18px 8px;
+    background: var(--bg);
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+  .ach-detail-name {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .ach-detail-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    font-style: italic;
+    font-family: var(--serif);
+  }
+  .ach-detail-status {
+    margin-top: 10px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+  }
+  .ach-detail-status.earned { color: var(--success); }
+
+  /* ===== DATA TAB ===== */
   .data-block {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -518,7 +867,7 @@ const Store = {
   remove(key) { try { localStorage.removeItem(key); } catch {} }
 };
 
-const KEYS = ['sessions','fast','weights','activeWorkout','lastTab','weightRange'];
+const KEYS = ['sessions','fast','weights','activeWorkout','lastTab','weightRange','achievements'];
 
 /* ===== PROGRAM ===== */
 const PROGRAM = {
@@ -547,8 +896,175 @@ const PROGRAM = {
 };
 const WEEK_GOAL = 2;
 
+/* ===== QUOTES ===== */
+const QUOTES = [
+  "The barbell doesn't know your story.",
+  "Show up — especially when you don't feel like it.",
+  "The pain you feel today will be the strength you feel tomorrow.",
+  "Discipline is choosing what you want most over what you want now.",
+  "Small steps. Every day. That's the whole game.",
+  "It never gets easier. You just get better.",
+  "Train hard. Recover harder.",
+  "What gets measured gets managed.",
+  "The work works.",
+  "You vs. you. Nobody else.",
+  "Strength comes from an indomitable will.",
+  "Stop talking. Start lifting.",
+  "Hard now. Easy later.",
+  "Champions are made on the days nobody's watching."
+];
+
+function quoteOfTheDay() {
+  const d = new Date();
+  const dayOfYear = Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 86400000);
+  return QUOTES[dayOfYear % QUOTES.length];
+}
+
+/* ===== ACHIEVEMENTS ===== */
+const ACHIEVEMENTS = [
+  // workouts - amber
+  { id: 'first-lift', name: 'First Lift', icon: '01', cls: 'short', color: '#E8A33D', desc: 'Complete your first workout.', check: d => d.lifts >= 1 },
+  { id: 'lift-5', name: '5 Sessions', icon: '05', cls: 'short', color: '#E8A33D', desc: '5 workouts logged.', check: d => d.lifts >= 5 },
+  { id: 'lift-25', name: '25 Sessions', icon: '25', cls: 'short', color: '#E8A33D', desc: '25 workouts. Habit territory.', check: d => d.lifts >= 25 },
+  { id: 'lift-100', name: 'Century', icon: '100', cls: 'short', color: '#FFE66D', desc: '100 workouts logged. Legend tier.', check: d => d.lifts >= 100 },
+  { id: 'week-goal', name: 'Week Hit', icon: '✦', cls: 'tall', color: '#E8A33D', desc: 'Hit your weekly lift goal for the first time.', check: d => d.weeklyGoalHits >= 1 },
+  { id: 'week-streak-4', name: 'Month Strong', icon: '4w', cls: 'short', color: '#FFE66D', desc: 'Four weeks at goal in a row.', check: d => d.maxWeekStreak >= 4 },
+
+  // cardio - cyan
+  { id: 'first-mile', name: 'On the Road', icon: '▷', cls: 'tall', color: '#4ECDC4', desc: 'Log your first walk or run.', check: d => d.miles >= 0.5 },
+  { id: 'miles-25', name: '25 Mile Club', icon: '25', cls: 'short', color: '#4ECDC4', desc: '25 total miles covered.', check: d => d.miles >= 25 },
+  { id: 'miles-100', name: 'Triple Digit', icon: '100', cls: 'short', color: '#4ECDC4', desc: '100 total miles.', check: d => d.miles >= 100 },
+  { id: 'long-run', name: 'Long Run', icon: '5+', cls: 'short', color: '#FFE66D', desc: 'A single session of 5+ miles.', check: d => d.longestRun >= 5 },
+
+  // weight - hot pink
+  { id: 'first-weight', name: 'Step On', icon: '◯', cls: 'tall', color: '#FF3D7F', desc: 'Log your first weight.', check: d => d.weighIns >= 1 },
+  { id: 'weight-streak-7', name: 'Daily Habit', icon: '7d', cls: 'short', color: '#FF3D7F', desc: 'Weigh in 7 days in a row.', check: d => d.weightStreak >= 7 },
+  { id: 'lost-5', name: '-5 lb', icon: '-5', cls: 'short', color: '#FF3D7F', desc: 'Down 5 pounds from your starting weight.', check: d => d.weightLost >= 5 },
+  { id: 'lost-10', name: '-10 lb', icon: '-10', cls: 'short', color: '#FF3D7F', desc: 'Down 10 pounds.', check: d => d.weightLost >= 10 },
+  { id: 'lost-20', name: '-20 lb', icon: '-20', cls: 'short', color: '#FF3D7F', desc: 'Down 20 pounds. Real progress.', check: d => d.weightLost >= 20 },
+  { id: 'lost-30', name: '-30 lb', icon: '-30', cls: 'short', color: '#FFE66D', desc: 'Thirty pounds gone. New you.', check: d => d.weightLost >= 30 },
+  { id: 'bmi-30', name: 'Under 30', icon: 'BMI', cls: 'short', color: '#FFE66D', desc: 'BMI under 30 (assumes 6\'2"). The line crossed.', check: d => d.bmi !== null && d.bmi < 30 },
+
+  // fasting - purple
+  { id: 'first-fast', name: 'First Fast', icon: '◌', cls: 'tall', color: '#B388EB', desc: 'Complete your first fast.', check: d => d.fasts >= 1 },
+  { id: 'fast-goal-hit', name: 'On Target', icon: '◎', cls: 'tall', color: '#B388EB', desc: 'Hit your fast goal once.', check: d => d.fastGoalHits >= 1 },
+  { id: 'fast-24', name: '24h Fast', icon: '24h', cls: 'short', color: '#FFE66D', desc: 'Complete a 24+ hour fast.', check: d => d.maxFastHours >= 24 },
+  { id: 'fasts-10', name: '10 Fasts', icon: '10', cls: 'short', color: '#B388EB', desc: '10 fasts logged.', check: d => d.fasts >= 10 },
+  { id: 'fasts-50', name: '50 Fasts', icon: '50', cls: 'short', color: '#B388EB', desc: '50 fasts logged. Steady.', check: d => d.fasts >= 50 }
+];
+
+const HEIGHT_INCHES = 74; // 6'2", used for BMI calculations
+
+function computeAchievementData() {
+  const sessions = getSessions();
+  const weights = getWeights().slice().sort((a,b) => a.date.localeCompare(b.date));
+  const fast = getFastState();
+
+  const lifts = sessions.filter(s => ['A','B','Custom'].includes(s.type)).length;
+  const miles = sessions.filter(s => s.type === 'Walk/Run').reduce((s, x) => s + (x.miles||0), 0);
+  const longestRun = sessions.filter(s => s.type === 'Walk/Run').reduce((m, s) => Math.max(m, s.miles||0), 0);
+  const weighIns = weights.length;
+  const weightLost = weighIns >= 2 ? weights[0].value - weights[weights.length-1].value : 0;
+  const currentWeight = weighIns > 0 ? weights[weights.length-1].value : null;
+  const bmi = currentWeight ? (currentWeight / (HEIGHT_INCHES * HEIGHT_INCHES)) * 703 : null;
+
+  // weight streak: consecutive days ending today (or the most recent entry)
+  let weightStreak = 0;
+  if (weighIns > 0) {
+    const dates = new Set(weights.map(w => w.date));
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    for (let i = 0; i < 90; i++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() - i);
+      const iso = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+      if (dates.has(iso)) weightStreak++;
+      else if (i > 0) break;
+      else continue;
+    }
+  }
+
+  // Weekly goal streaks
+  const liftDates = sessions.filter(s => ['A','B','Custom'].includes(s.type)).map(s => isoWeek(new Date(s.date)));
+  const weekCounts = {};
+  liftDates.forEach(w => { weekCounts[w] = (weekCounts[w]||0) + 1; });
+  const weeklyGoalHits = Object.values(weekCounts).filter(c => c >= WEEK_GOAL).length;
+
+  // Compute max consecutive weeks at goal
+  let maxWeekStreak = 0;
+  const sortedWeeks = Object.keys(weekCounts).sort();
+  if (sortedWeeks.length > 0) {
+    let current = 1;
+    let prevWeek = sortedWeeks[0];
+    if (weekCounts[prevWeek] < WEEK_GOAL) current = 0;
+    maxWeekStreak = current;
+    for (let i = 1; i < sortedWeeks.length; i++) {
+      const w = sortedWeeks[i];
+      if (weekCounts[w] >= WEEK_GOAL) {
+        // check if consecutive
+        if (consecutiveISOWeeks(prevWeek, w)) current++;
+        else current = 1;
+      } else {
+        current = 0;
+      }
+      maxWeekStreak = Math.max(maxWeekStreak, current);
+      prevWeek = w;
+    }
+  }
+
+  const fasts = fast.history.length;
+  const fastGoalHits = fast.history.filter(f => (new Date(f.end) - new Date(f.start))/3600/1000 >= (f.goal||17)).length;
+  const maxFastHours = fast.history.reduce((m, f) => Math.max(m, (new Date(f.end) - new Date(f.start))/3600/1000), 0);
+
+  return { lifts, miles, longestRun, weighIns, weightLost, weightStreak, weeklyGoalHits, maxWeekStreak, fasts, fastGoalHits, maxFastHours, bmi };
+}
+
+function consecutiveISOWeeks(a, b) {
+  // a, b like "2026-W14"
+  const [ay, aw] = a.split('-W').map(Number);
+  const [by, bw] = b.split('-W').map(Number);
+  if (ay === by) return bw === aw + 1;
+  if (by === ay + 1) {
+    // Year boundary - simple heuristic
+    return (aw >= 52) && bw === 1;
+  }
+  return false;
+}
+
+function checkAchievements() {
+  const data = computeAchievementData();
+  const earned = Store.get('achievements', {});
+  const newlyEarned = [];
+
+  ACHIEVEMENTS.forEach(a => {
+    if (!earned[a.id] && a.check(data)) {
+      earned[a.id] = new Date().toISOString();
+      newlyEarned.push(a);
+    }
+  });
+
+  if (newlyEarned.length > 0) {
+    Store.set('achievements', earned);
+    newlyEarned.forEach((a, i) => {
+      setTimeout(() => showAchievementToast(a), i * 2200);
+    });
+  }
+  return earned;
+}
+
+function showAchievementToast(a) {
+  const t = document.getElementById('toast');
+  t.innerHTML = `<span class="ach-label">★ Achievement Unlocked</span><span class="ach-name">${a.name}</span>`;
+  t.classList.add('show', 'achievement');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => {
+    t.classList.remove('show');
+    setTimeout(() => t.classList.remove('achievement'), 300);
+  }, 2000);
+}
+
 /* ===== UTILS ===== */
-const pad = n => String(n).padStart(2, '0');
+function pad(n) { return String(n).padStart(2, '0'); }
 
 function fmtDuration(ms) {
   const s = Math.max(0, Math.floor(ms / 1000));
@@ -589,14 +1105,10 @@ function fmtDateTime(iso) {
   const day = isToday ? 'Today' : isYest ? 'Yesterday' : d.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
   return `${day} · ${fmtTime(iso)}`;
 }
-function toLocalInput(iso) {
-  const d = new Date(iso);
-  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
-}
-function fromLocalInput(str) { return new Date(str).toISOString(); }
 
 function showToast(msg) {
   const t = document.getElementById('toast');
+  t.classList.remove('achievement');
   t.textContent = msg;
   t.classList.add('show');
   clearTimeout(showToast._t);
@@ -614,6 +1126,195 @@ function closeModal() {
 document.getElementById('modal').addEventListener('click', (e) => {
   if (e.target.id === 'modal') closeModal();
 });
+
+/* ===== WHEEL DATE/TIME PICKER ===== */
+
+function buildDayOptions(daysBack = 14) {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const options = [];
+  for (let i = 0; i < daysBack; i++) {
+    const d = new Date(today);
+    d.setDate(today.getDate() - i);
+    let label;
+    if (i === 0) label = 'Today';
+    else if (i === 1) label = 'Yesterday';
+    else label = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    options.push({ value: -i, label });
+  }
+  return options;
+}
+
+function buildHourOptions() {
+  const options = [];
+  for (let h = 0; h < 24; h++) {
+    const period = h < 12 ? 'AM' : 'PM';
+    const hour12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+    options.push({ value: h, label: `${hour12} ${period}` });
+  }
+  return options;
+}
+
+function buildMinuteOptions() {
+  const options = [];
+  for (let m = 0; m < 60; m += 5) {
+    options.push({ value: m, label: pad(m) });
+  }
+  return options;
+}
+
+function setupDateTimePicker(container, initialIso) {
+  const initial = new Date(initialIso || Date.now());
+  const dayOpts = buildDayOptions(14);
+  const hourOpts = buildHourOptions();
+  const minOpts = buildMinuteOptions();
+  const ITEM_H = 36;
+
+  // Compute initial indices
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const initialDay = new Date(initial);
+  initialDay.setHours(0,0,0,0);
+  let dayOffset = Math.round((initialDay - today) / 86400000);
+  if (dayOffset > 0) dayOffset = 0; // future not allowed
+  if (dayOffset < -13) dayOffset = -13;
+
+  const initialDayIdx = Math.max(0, dayOpts.findIndex(o => o.value === dayOffset));
+  const initialHourIdx = Math.max(0, hourOpts.findIndex(o => o.value === initial.getHours()));
+  const initMin = Math.floor(initial.getMinutes() / 5) * 5;
+  const initialMinIdx = Math.max(0, minOpts.findIndex(o => o.value === initMin));
+
+  container.innerHTML = `
+    <div class="dt-picker">
+      <div class="dt-display" id="dt-display">${formatPicked(initial)}</div>
+      <div class="dt-wheels">
+        <div class="dt-indicator"></div>
+        <div class="dt-wheel" data-wheel="day">
+          <div class="dt-wheel-spacer"></div>
+          ${dayOpts.map(o => `<div class="dt-item" data-value="${o.value}">${o.label}</div>`).join('')}
+          <div class="dt-wheel-spacer"></div>
+        </div>
+        <div class="dt-wheel" data-wheel="hour">
+          <div class="dt-wheel-spacer"></div>
+          ${hourOpts.map(o => `<div class="dt-item" data-value="${o.value}">${o.label}</div>`).join('')}
+          <div class="dt-wheel-spacer"></div>
+        </div>
+        <div class="dt-wheel" data-wheel="minute">
+          <div class="dt-wheel-spacer"></div>
+          ${minOpts.map(o => `<div class="dt-item" data-value="${o.value}">${o.label}</div>`).join('')}
+          <div class="dt-wheel-spacer"></div>
+        </div>
+      </div>
+      <button type="button" class="dt-now-btn" id="dt-now-${container.id}">↺ Now</button>
+    </div>
+  `;
+
+  const wheels = container.querySelectorAll('.dt-wheel');
+  const dayWheel = wheels[0];
+  const hourWheel = wheels[1];
+  const minWheel = wheels[2];
+
+  function getIdx(wheel) {
+    return Math.round(wheel.scrollTop / ITEM_H);
+  }
+
+  function setWheel(wheel, idx) {
+    wheel.scrollTop = idx * ITEM_H;
+  }
+
+  function snapWheel(wheel) {
+    const idx = getIdx(wheel);
+    wheel.scrollTo({ top: idx * ITEM_H, behavior: 'smooth' });
+  }
+
+  function updateSelected() {
+    wheels.forEach(w => {
+      const idx = getIdx(w);
+      w.querySelectorAll('.dt-item').forEach((it, i) => {
+        it.classList.toggle('selected', i === idx);
+      });
+    });
+    updateDisplay();
+  }
+
+  function updateDisplay() {
+    const d = currentDate();
+    document.getElementById('dt-display').textContent = formatPicked(d);
+  }
+
+  function currentDate() {
+    const dayIdx = getIdx(dayWheel);
+    const hourIdx = getIdx(hourWheel);
+    const minIdx = getIdx(minWheel);
+    const dayVal = dayOpts[Math.min(Math.max(dayIdx, 0), dayOpts.length-1)]?.value || 0;
+    const hour = hourOpts[Math.min(Math.max(hourIdx, 0), hourOpts.length-1)]?.value || 0;
+    const min = minOpts[Math.min(Math.max(minIdx, 0), minOpts.length-1)]?.value || 0;
+    const d = new Date();
+    d.setDate(d.getDate() + dayVal);
+    d.setHours(hour, min, 0, 0);
+    return d;
+  }
+
+  function formatPicked(d) {
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const dd = new Date(d);
+    dd.setHours(0,0,0,0);
+    const diff = Math.round((dd - today) / 86400000);
+    let dayPart;
+    if (diff === 0) dayPart = 'Today';
+    else if (diff === -1) dayPart = 'Yesterday';
+    else dayPart = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    return `${dayPart} · ${d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`;
+  }
+
+  // Set initial positions (do this after layout settles)
+  requestAnimationFrame(() => {
+    setWheel(dayWheel, initialDayIdx);
+    setWheel(hourWheel, initialHourIdx);
+    setWheel(minWheel, initialMinIdx);
+    updateSelected();
+  });
+
+  // Scroll listeners with snap-on-stop
+  wheels.forEach(w => {
+    let timer;
+    w.addEventListener('scroll', () => {
+      // Update selection immediately for feedback
+      const idx = getIdx(w);
+      w.querySelectorAll('.dt-item').forEach((it, i) => {
+        it.classList.toggle('selected', i === idx);
+      });
+      updateDisplay();
+      clearTimeout(timer);
+      timer = setTimeout(() => snapWheel(w), 100);
+    });
+
+    // Tap to select
+    w.querySelectorAll('.dt-item').forEach((it, i) => {
+      it.addEventListener('click', () => {
+        w.scrollTo({ top: i * ITEM_H, behavior: 'smooth' });
+        setTimeout(updateSelected, 250);
+      });
+    });
+  });
+
+  // Now button
+  container.querySelector(`#dt-now-${container.id}`).addEventListener('click', () => {
+    const now = new Date();
+    const minVal = Math.floor(now.getMinutes() / 5) * 5;
+    const hourIdx = hourOpts.findIndex(o => o.value === now.getHours());
+    const minIdx = minOpts.findIndex(o => o.value === minVal);
+    dayWheel.scrollTo({ top: 0, behavior: 'smooth' });
+    hourWheel.scrollTo({ top: hourIdx * ITEM_H, behavior: 'smooth' });
+    minWheel.scrollTo({ top: minIdx * ITEM_H, behavior: 'smooth' });
+    setTimeout(updateSelected, 300);
+  });
+
+  return {
+    getValue: () => currentDate().toISOString()
+  };
+}
 
 /* ===== HEADER ===== */
 function updateHeader() {
@@ -651,6 +1352,75 @@ function nextSuggestedAB() {
   return ab[ab.length - 1].type === 'A' ? 'B' : 'A';
 }
 
+/* ===== SYNTHWAVE HERO SVG ===== */
+function heroSVG() {
+  return `<svg viewBox="0 0 400 140" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#0a0118"/>
+        <stop offset="0.55" stop-color="#3d0a4f"/>
+        <stop offset="0.85" stop-color="#9c1162"/>
+        <stop offset="1" stop-color="#ff1493"/>
+      </linearGradient>
+      <linearGradient id="sunGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff066"/>
+        <stop offset="0.4" stop-color="#ffae42"/>
+        <stop offset="0.75" stop-color="#ff5e62"/>
+        <stop offset="1" stop-color="#ff1493"/>
+      </linearGradient>
+      <linearGradient id="groundFade" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#14110F" stop-opacity="0"/>
+        <stop offset="1" stop-color="#14110F" stop-opacity="0.95"/>
+      </linearGradient>
+    </defs>
+
+    <rect width="400" height="92" fill="url(#sky)"/>
+
+    <g fill="white" opacity="0.85">
+      <circle cx="25" cy="14" r="0.7"/>
+      <circle cx="78" cy="8" r="0.5"/>
+      <circle cx="143" cy="18" r="0.7"/>
+      <circle cx="58" cy="32" r="0.4"/>
+      <circle cx="320" cy="11" r="0.5"/>
+      <circle cx="368" cy="24" r="0.7"/>
+      <circle cx="278" cy="35" r="0.5"/>
+      <circle cx="105" cy="48" r="0.4"/>
+      <circle cx="355" cy="52" r="0.4"/>
+    </g>
+
+    <g>
+      <circle cx="200" cy="84" r="34" fill="url(#sunGrad)"/>
+      <rect x="160" y="74" width="80" height="2.5" fill="#0a0118"/>
+      <rect x="160" y="80" width="80" height="2" fill="#0a0118"/>
+      <rect x="160" y="85" width="80" height="1.6" fill="#0a0118"/>
+      <rect x="160" y="89" width="80" height="1.2" fill="#0a0118"/>
+      <rect x="160" y="92" width="80" height="0.9" fill="#0a0118"/>
+    </g>
+
+    <line x1="0" y1="94" x2="400" y2="94" stroke="#ff1493" stroke-width="1"/>
+
+    <g stroke="#ff1493" stroke-width="0.6">
+      <line x1="200" y1="94" x2="-120" y2="140" stroke-opacity="0.7"/>
+      <line x1="200" y1="94" x2="-40" y2="140" stroke-opacity="0.7"/>
+      <line x1="200" y1="94" x2="30" y2="140" stroke-opacity="0.7"/>
+      <line x1="200" y1="94" x2="90" y2="140" stroke-opacity="0.7"/>
+      <line x1="200" y1="94" x2="150" y2="140" stroke-opacity="0.7"/>
+      <line x1="200" y1="94" x2="250" y2="140" stroke-opacity="0.7"/>
+      <line x1="200" y1="94" x2="310" y2="140" stroke-opacity="0.7"/>
+      <line x1="200" y1="94" x2="370" y2="140" stroke-opacity="0.7"/>
+      <line x1="200" y1="94" x2="440" y2="140" stroke-opacity="0.7"/>
+      <line x1="200" y1="94" x2="520" y2="140" stroke-opacity="0.7"/>
+
+      <line x1="0" y1="100" x2="400" y2="100" stroke-opacity="0.6"/>
+      <line x1="0" y1="108" x2="400" y2="108" stroke-opacity="0.5"/>
+      <line x1="0" y1="118" x2="400" y2="118" stroke-opacity="0.4"/>
+      <line x1="0" y1="130" x2="400" y2="130" stroke-opacity="0.3"/>
+    </g>
+
+    <rect x="0" y="94" width="400" height="46" fill="url(#groundFade)"/>
+  </svg>`;
+}
+
 /* ===== LOG TAB ===== */
 let fastTickHandle = null;
 
@@ -666,46 +1436,59 @@ function renderLog() {
   const todayWeight = weights.find(w => w.date === todayISO());
   const fastElapsed = fast.start ? Date.now() - new Date(fast.start).getTime() : 0;
   const suggested = nextSuggestedAB();
+  const earned = Store.get('achievements', {});
+  const earnedCount = Object.keys(earned).length;
 
   const fastLabel = fast.start
-    ? `<span class="val active">${fmtDurationShort(fastElapsed)}</span>`
+    ? `<span class="val val-fast">${fmtDurationShort(fastElapsed)}</span>`
     : `<span class="val muted">—</span>`;
   const liftsLabel = `<span class="val ${lifts >= WEEK_GOAL ? 'active' : ''}">${lifts}/${WEEK_GOAL}</span>`;
   const weightLabel = todayWeight
-    ? `<span class="val">${todayWeight.value.toFixed(1)}</span>`
+    ? `<span class="val val-weight">${todayWeight.value.toFixed(1)}</span>`
     : `<span class="val muted">—</span>`;
 
   view.innerHTML = `
+    <div class="hero">
+      ${heroSVG()}
+      <div class="hero-title">LOG</div>
+      <div class="hero-quote">"${quoteOfTheDay()}"</div>
+    </div>
+
     <div class="today-banner">
       <div class="stat-pill"><div class="label">Fast</div>${fastLabel}</div>
       <div class="stat-pill"><div class="label">Lifts wk</div>${liftsLabel}</div>
       <div class="stat-pill"><div class="label">Weight</div>${weightLabel}</div>
     </div>
 
+    <div class="section-label">Milestones <span class="meta">${earnedCount} / ${ACHIEVEMENTS.length}</span></div>
+    <div class="badges-strip" id="badges-strip">
+      ${renderBadgesStrip(earned)}
+    </div>
+
     <div class="section-label">Weight</div>
     <div class="card">
       <div class="row">
         <input type="number" id="weight-input" step="0.1" placeholder="enter weight (lb)" inputmode="decimal">
-        <button class="primary" id="weight-save">Save</button>
+        <button class="primary weight" id="weight-save">Save</button>
       </div>
     </div>
 
     <div class="section-label">Move</div>
     <div class="card">
       <div class="button-grid">
-        <button class="move-card ${suggested==='A'?'suggested':''}" data-action="start-A">
+        <button class="move-card type-lift ${suggested==='A'?'suggested':''}" data-action="start-A">
           <div class="title">Workout A</div>
           <div class="sub">Push · Squat · Core</div>
         </button>
-        <button class="move-card ${suggested==='B'?'suggested':''}" data-action="start-B">
+        <button class="move-card type-lift ${suggested==='B'?'suggested':''}" data-action="start-B">
           <div class="title">Workout B</div>
           <div class="sub">Hinge · Pull · Core</div>
         </button>
-        <button class="move-card" data-action="log-walk">
+        <button class="move-card type-cardio" data-action="log-walk">
           <div class="title">Walk / Run</div>
           <div class="sub">Log miles</div>
         </button>
-        <button class="move-card" data-action="log-custom">
+        <button class="move-card type-lift" data-action="log-custom">
           <div class="title">Custom</div>
           <div class="sub">Free notes</div>
         </button>
@@ -715,7 +1498,7 @@ function renderLog() {
     <div class="section-label">Fast <span class="meta">Goal ${fast.goalHours}h</span></div>
     <div class="card">${renderFastInline(fast)}</div>
 
-    <div class="section-label">Recent</div>
+    <div class="section-label">Recent <span class="meta">tap to edit</span></div>
     <div class="card" style="padding: 4px 18px;">${renderRecentActivity()}</div>
   `;
 
@@ -737,7 +1520,104 @@ function renderLog() {
   const editStart = document.getElementById('edit-fast-start');
   if (editStart) editStart.addEventListener('click', editFastStart);
 
+  // Badges click handlers
+  view.querySelectorAll('.badge[data-id]').forEach(b => {
+    b.addEventListener('click', () => openAchievementDetail(b.dataset.id));
+  });
+  const allBadgesBtn = view.querySelector('.badge-count-display');
+  if (allBadgesBtn) allBadgesBtn.addEventListener('click', openAllAchievements);
+
+  // Recent item handlers
+  view.querySelectorAll('.recent-row[data-rec-kind]').forEach(el => {
+    el.addEventListener('click', () => {
+      const kind = el.dataset.recKind;
+      const idx = parseInt(el.dataset.recIdx);
+      editRecent(kind, idx);
+    });
+  });
+
   if (fast.start) startFastTick();
+}
+
+function renderBadgesStrip(earned) {
+  // Show earned first, then a couple of next-up
+  const earnedAchievements = ACHIEVEMENTS.filter(a => earned[a.id]);
+  const unearned = ACHIEVEMENTS.filter(a => !earned[a.id]);
+  const display = [...earnedAchievements, ...unearned.slice(0, 3)];
+  if (display.length === 0) return '<div class="empty" style="width:100%;">Start logging to earn badges</div>';
+
+  const total = ACHIEVEMENTS.length;
+  const earnedCount = Object.keys(earned).length;
+
+  return display.map(a => {
+    const isEarned = !!earned[a.id];
+    return `
+      <div class="badge ${isEarned ? 'earned' : 'locked'}" data-id="${a.id}" style="--badge-color: ${a.color}">
+        <div class="badge-circle">
+          <div class="badge-icon ${a.cls || ''}">${a.icon}</div>
+        </div>
+        <div class="badge-name">${a.name}</div>
+      </div>
+    `;
+  }).join('') + `
+    <div class="badge-count-display">
+      <strong>${earnedCount}/${total}</strong>
+      <span>View all</span>
+    </div>
+  `;
+}
+
+function openAllAchievements() {
+  const earned = Store.get('achievements', {});
+  openModal(`
+    <h3>Milestones</h3>
+    <div class="modal-sub">${Object.keys(earned).length} of ${ACHIEVEMENTS.length} earned</div>
+    <div class="achievement-grid">
+      ${ACHIEVEMENTS.map(a => {
+        const isEarned = !!earned[a.id];
+        return `
+          <div class="badge ${isEarned ? 'earned' : 'locked'}" data-id="${a.id}" style="--badge-color: ${a.color}">
+            <div class="badge-circle">
+              <div class="badge-icon ${a.cls || ''}">${a.icon}</div>
+            </div>
+            <div class="badge-name">${a.name}</div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+    <div class="button-row" style="margin-top:18px;">
+      <button class="secondary" onclick="closeModal()">Close</button>
+    </div>
+  `);
+  document.querySelectorAll('.modal .badge[data-id]').forEach(b => {
+    b.addEventListener('click', () => openAchievementDetail(b.dataset.id));
+  });
+}
+
+function openAchievementDetail(id) {
+  const a = ACHIEVEMENTS.find(x => x.id === id);
+  if (!a) return;
+  const earned = Store.get('achievements', {});
+  const isEarned = !!earned[id];
+  const earnedAt = earned[id];
+
+  openModal(`
+    <div class="ach-detail">
+      <div class="badge ${isEarned ? 'earned' : 'locked'}" style="--badge-color: ${a.color}; margin: 0 auto 14px;">
+        <div class="badge-circle" style="width: 80px; height: 80px;">
+          <div class="badge-icon ${a.cls || ''}" style="font-size: ${a.cls === 'tall' ? '24px' : a.cls === 'short' ? '14px' : '18px'};">${a.icon}</div>
+        </div>
+      </div>
+      <div class="ach-detail-name">${a.name}</div>
+      <div class="ach-detail-desc">${a.desc}</div>
+      <div class="ach-detail-status ${isEarned ? 'earned' : ''}">
+        ${isEarned ? '✓ Earned ' + fmtDateLong(earnedAt) : '◯ Locked'}
+      </div>
+    </div>
+    <div class="button-row">
+      <button class="secondary" onclick="closeModal()">Close</button>
+    </div>
+  `);
 }
 
 function renderFastInline(fast) {
@@ -760,7 +1640,7 @@ function renderFastInline(fast) {
             <span id="fast-remaining">${remText}</span>
           </div>
         </div>
-        <button class="danger" id="fast-toggle">End</button>
+        <button class="danger fast" id="fast-toggle">End</button>
       </div>
       <div class="fast-started-row">
         <span>Started ${fmtDateTime(fast.start)}</span>
@@ -774,41 +1654,374 @@ function renderFastInline(fast) {
         <div class="time dim">Not fasting</div>
         <div class="progress-row">Goal: ${fast.goalHours}h · start when you finish eating</div>
       </div>
-      <button class="primary" id="fast-toggle">Start</button>
+      <button class="primary fast" id="fast-toggle">Start</button>
     </div>
   `;
 }
 
 function renderRecentActivity() {
+  // Build flat list of items, color-coded by type
   const items = [];
-  getSessions().forEach(s => {
+
+  getSessions().forEach((s, idx) => {
     let detail = '—';
-    if (s.type === 'Walk/Run') detail = `${s.miles ? s.miles.toFixed(1) + ' mi' : ''}${s.duration ? ' · ' + s.duration + 'm' : ''}`.trim() || '—';
-    else if (s.type === 'Custom') detail = s.notes ? (s.notes.length > 50 ? s.notes.slice(0, 50) + '…' : s.notes) : '—';
-    items.push({ ts: s.date, type: s.type, detail });
+    let typeLabel = s.type;
+    let typeClass = 'type-lift';
+    if (s.type === 'Walk/Run') {
+      const parts = [];
+      if (s.miles) parts.push(s.miles.toFixed(1) + ' mi');
+      if (s.duration) parts.push(s.duration + ' min');
+      detail = parts.length ? parts.join(' · ') : '—';
+      typeLabel = 'Walk/Run';
+      typeClass = 'type-cardio';
+    } else if (s.type === 'Custom') {
+      detail = s.notes ? (s.notes.length > 60 ? s.notes.slice(0, 60) + '…' : s.notes) : '—';
+      typeLabel = 'Custom';
+    } else {
+      // A or B
+      typeLabel = 'Lift ' + s.type;
+      detail = PROGRAM[s.type] ? PROGRAM[s.type].focus : '—';
+    }
+    items.push({ ts: s.date, typeLabel, typeClass, detail, kind: 'session', idx });
   });
-  getFastState().history.forEach(f => {
+
+  getFastState().history.forEach((f, idx) => {
+    const dur = new Date(f.end) - new Date(f.start);
+    const hours = dur / 3600 / 1000;
+    const hit = hours >= (f.goal || 17);
     items.push({
       ts: f.end,
-      type: 'Fast',
-      detail: fmtDurationShort(new Date(f.end) - new Date(f.start))
+      typeLabel: 'Fast',
+      typeClass: 'type-fast',
+      detail: `${fmtDurationShort(dur)}${hit ? ' ✓' : ''}`,
+      kind: 'fast',
+      idx,
+      hideTime: false
     });
   });
-  getWeights().forEach(w => {
-    items.push({ ts: w.date + 'T08:00:00', type: 'Weight', detail: w.value.toFixed(1) + ' lb' });
+
+  getWeights().forEach((w, idx) => {
+    items.push({
+      ts: w.date + 'T08:00:00',
+      typeLabel: 'Weight',
+      typeClass: 'type-weight',
+      detail: w.value.toFixed(1) + ' lb',
+      kind: 'weight',
+      idx,
+      hideTime: true
+    });
   });
 
-  items.sort((a, b) => new Date(b.ts) - new Date(a.ts));
-  const recent = items.slice(0, 10);
-  if (recent.length === 0) return '<div class="empty">Nothing logged yet.</div>';
+  if (items.length === 0) return '<div class="empty">Nothing logged yet.</div>';
 
-  return recent.map(it => `
-    <div class="history-item">
-      <span class="date">${fmtDateLong(it.ts)}</span>
-      <span class="type">${it.type}</span>
-      <span class="detail">${it.detail}</span>
+  // Group by local day key (YYYY-MM-DD)
+  function dayKey(iso) {
+    const d = new Date(iso);
+    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  }
+  const itemsByDay = {};
+  items.forEach(it => {
+    const k = dayKey(it.ts);
+    if (!itemsByDay[k]) itemsByDay[k] = [];
+    itemsByDay[k].push(it);
+  });
+  // Sort each day's items most-recent first
+  Object.values(itemsByDay).forEach(arr => arr.sort((a, b) => new Date(b.ts) - new Date(a.ts)));
+
+  // Build the last 7 days (so rest days are explicit)
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const groups = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(today);
+    d.setDate(today.getDate() - i);
+    const k = dayKey(d.toISOString());
+    groups.push({ date: d, key: k, items: itemsByDay[k] || [] });
+  }
+  // Add older days that have entries (beyond the 7-day rest-day window)
+  const olderKeys = Object.keys(itemsByDay)
+    .filter(k => !groups.find(g => g.key === k))
+    .sort((a, b) => b.localeCompare(a));
+  olderKeys.slice(0, 7).forEach(k => {
+    groups.push({ date: new Date(k + 'T12:00:00'), key: k, items: itemsByDay[k] });
+  });
+
+  const yesterday = new Date(today); yesterday.setDate(today.getDate() - 1);
+
+  return groups.map(g => {
+    const isToday = g.date.toDateString() === today.toDateString();
+    const isYesterday = g.date.toDateString() === yesterday.toDateString();
+    let label;
+    if (isToday) label = 'Today';
+    else if (isYesterday) label = 'Yesterday';
+    else label = g.date.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+
+    const meta = g.items.length > 0
+      ? `<span class="day-meta">${g.items.length} ${g.items.length === 1 ? 'entry' : 'entries'}</span>`
+      : '';
+
+    const body = g.items.length === 0
+      ? '<div class="day-rest">Rest day</div>'
+      : g.items.map(it => `
+          <div class="recent-row ${it.typeClass}" data-rec-kind="${it.kind}" data-rec-idx="${it.idx}">
+            <span class="recent-type">${it.typeLabel}</span>
+            <span class="recent-detail">${it.detail}</span>
+            <span class="recent-time">${it.hideTime ? '' : fmtTime(it.ts)}</span>
+          </div>
+        `).join('');
+
+    return `
+      <div class="day-group">
+        <div class="day-header">
+          <span class="day-label ${isToday ? 'today' : ''}">${label}</span>
+          ${meta}
+        </div>
+        ${body}
+      </div>
+    `;
+  }).join('');
+}
+
+/* ===== EDIT RECENT ===== */
+function editRecent(kind, idx) {
+  if (kind === 'session') {
+    const s = getSessions()[idx];
+    if (!s) return;
+    if (s.type === 'Walk/Run') editWalkRun(idx);
+    else if (s.type === 'Custom') editCustom(idx);
+    else editLiftSession(idx);
+  } else if (kind === 'weight') {
+    editWeight(idx);
+  } else if (kind === 'fast') {
+    editFastHistoryByIdx(idx);
+  }
+}
+
+function editLiftSession(idx) {
+  const s = getSessions()[idx];
+  if (!s) return;
+  openModal(`
+    <h3>Edit ${PROGRAM[s.type] ? PROGRAM[s.type].title : s.type}</h3>
+    <div class="modal-sub">Adjust the time, change the type, or delete this entry.</div>
+    <label>Type</label>
+    <div class="row" style="gap:6px;">
+      <button class="secondary" data-type="A" style="flex:1;">A</button>
+      <button class="secondary" data-type="B" style="flex:1;">B</button>
+      <button class="secondary" data-type="Custom" style="flex:1;">Custom</button>
     </div>
-  `).join('');
+    <label>When</label>
+    <div id="lift-picker"></div>
+    <div class="button-row" style="margin-top:18px;">
+      <button class="danger" id="del">Delete</button>
+      <button class="primary" id="save">Save</button>
+    </div>
+  `);
+  document.getElementById('lift-picker').id = 'lift-picker';
+  const picker = setupDateTimePicker(document.getElementById('lift-picker'), s.date);
+
+  let newType = s.type;
+  function updateTypeButtons() {
+    document.querySelectorAll('[data-type]').forEach(b => {
+      const isSelected = b.dataset.type === newType;
+      b.style.background = isSelected ? 'var(--accent)' : '';
+      b.style.color = isSelected ? 'var(--bg)' : '';
+      b.style.borderColor = isSelected ? 'var(--accent)' : '';
+    });
+  }
+  updateTypeButtons();
+  document.querySelectorAll('[data-type]').forEach(b => {
+    b.addEventListener('click', () => { newType = b.dataset.type; updateTypeButtons(); });
+  });
+
+  document.getElementById('save').addEventListener('click', () => {
+    const sessions = getSessions();
+    sessions[idx] = { ...sessions[idx], type: newType, date: picker.getValue() };
+    Store.set('sessions', sessions);
+    closeModal();
+    showToast('Updated');
+    renderLog();
+    checkAchievements();
+  });
+  document.getElementById('del').addEventListener('click', () => {
+    if (!confirm('Delete this workout?')) return;
+    const sessions = getSessions();
+    sessions.splice(idx, 1);
+    Store.set('sessions', sessions);
+    closeModal();
+    showToast('Deleted');
+    renderLog();
+  });
+}
+
+function editWalkRun(idx) {
+  const s = getSessions()[idx];
+  if (!s) return;
+  openModal(`
+    <h3>Edit Walk / Run</h3>
+    <div class="modal-sub">Adjust miles, time, or delete.</div>
+    <label>Miles</label>
+    <input type="number" id="wr-miles" step="0.1" inputmode="decimal" value="${s.miles || ''}">
+    <label>Minutes (optional)</label>
+    <input type="number" id="wr-mins" step="1" inputmode="numeric" value="${s.duration || ''}">
+    <label>When</label>
+    <div id="wr-picker"></div>
+    <div class="button-row" style="margin-top:18px;">
+      <button class="danger" id="del">Delete</button>
+      <button class="primary cardio" id="save">Save</button>
+    </div>
+  `);
+  const picker = setupDateTimePicker(document.getElementById('wr-picker'), s.date);
+
+  document.getElementById('save').addEventListener('click', () => {
+    const miles = parseFloat(document.getElementById('wr-miles').value);
+    const mins = parseInt(document.getElementById('wr-mins').value);
+    if (isNaN(miles) || miles <= 0) { showToast('Enter miles'); return; }
+    const sessions = getSessions();
+    const updated = { ...sessions[idx], miles, date: picker.getValue() };
+    if (!isNaN(mins) && mins > 0) updated.duration = mins;
+    else delete updated.duration;
+    sessions[idx] = updated;
+    Store.set('sessions', sessions);
+    closeModal();
+    showToast('Updated');
+    renderLog();
+    checkAchievements();
+  });
+  document.getElementById('del').addEventListener('click', () => {
+    if (!confirm('Delete this entry?')) return;
+    const sessions = getSessions();
+    sessions.splice(idx, 1);
+    Store.set('sessions', sessions);
+    closeModal();
+    showToast('Deleted');
+    renderLog();
+  });
+}
+
+function editCustom(idx) {
+  const s = getSessions()[idx];
+  if (!s) return;
+  openModal(`
+    <h3>Edit Custom Workout</h3>
+    <div class="modal-sub">Edit notes, time, or delete.</div>
+    <label>Notes</label>
+    <textarea id="c-notes">${(s.notes || '').replace(/</g, '&lt;')}</textarea>
+    <label>When</label>
+    <div id="c-picker"></div>
+    <div class="button-row" style="margin-top:18px;">
+      <button class="danger" id="del">Delete</button>
+      <button class="primary" id="save">Save</button>
+    </div>
+  `);
+  const picker = setupDateTimePicker(document.getElementById('c-picker'), s.date);
+
+  document.getElementById('save').addEventListener('click', () => {
+    const notes = document.getElementById('c-notes').value.trim();
+    if (!notes) { showToast('Add notes first'); return; }
+    const sessions = getSessions();
+    sessions[idx] = { ...sessions[idx], notes, date: picker.getValue() };
+    Store.set('sessions', sessions);
+    closeModal();
+    showToast('Updated');
+    renderLog();
+  });
+  document.getElementById('del').addEventListener('click', () => {
+    if (!confirm('Delete this entry?')) return;
+    const sessions = getSessions();
+    sessions.splice(idx, 1);
+    Store.set('sessions', sessions);
+    closeModal();
+    showToast('Deleted');
+    renderLog();
+  });
+}
+
+function editWeight(idx) {
+  const w = getWeights()[idx];
+  if (!w) return;
+  openModal(`
+    <h3>Edit Weight</h3>
+    <div class="modal-sub">Adjust the value, date, or delete.</div>
+    <label>Weight (lb)</label>
+    <input type="number" id="w-val" step="0.1" inputmode="decimal" value="${w.value}">
+    <label>Date</label>
+    <input type="date" id="w-date" value="${w.date}">
+    <div class="button-row" style="margin-top:18px;">
+      <button class="danger" id="del">Delete</button>
+      <button class="primary weight" id="save">Save</button>
+    </div>
+  `);
+  document.getElementById('save').addEventListener('click', () => {
+    const val = parseFloat(document.getElementById('w-val').value);
+    const date = document.getElementById('w-date').value;
+    if (isNaN(val) || val < 50 || val > 700) { showToast('Invalid weight'); return; }
+    if (!date) { showToast('Invalid date'); return; }
+    const weights = getWeights();
+    // If date changed, remove any other entry on that date
+    const filtered = weights.filter((x, i) => i === idx || x.date !== date);
+    const newIdx = filtered.findIndex((x, i) => i === idx || (weights[idx] && x === weights[idx]));
+    // Simpler: rebuild
+    const others = weights.filter((_, i) => i !== idx).filter(x => x.date !== date);
+    const final = [...others, { date, value: val }].sort((a, b) => a.date.localeCompare(b.date));
+    Store.set('weights', final);
+    closeModal();
+    showToast('Updated');
+    renderLog();
+    checkAchievements();
+  });
+  document.getElementById('del').addEventListener('click', () => {
+    if (!confirm('Delete this weight entry?')) return;
+    const weights = getWeights();
+    weights.splice(idx, 1);
+    Store.set('weights', weights);
+    closeModal();
+    showToast('Deleted');
+    renderLog();
+  });
+}
+
+function editFastHistoryByIdx(idx) {
+  const fast = getFastState();
+  const entry = fast.history[idx];
+  if (!entry) return;
+  openModal(`
+    <h3>Edit Fast</h3>
+    <div class="modal-sub">Adjust the start or end, or delete.</div>
+    <label>Start</label>
+    <div id="fast-start-picker"></div>
+    <label>End</label>
+    <div id="fast-end-picker"></div>
+    <div class="button-row" style="margin-top:18px;">
+      <button class="danger" id="del">Delete</button>
+      <button class="primary fast" id="save">Save</button>
+    </div>
+  `);
+  const startPicker = setupDateTimePicker(document.getElementById('fast-start-picker'), entry.start);
+  const endPicker = setupDateTimePicker(document.getElementById('fast-end-picker'), entry.end);
+
+  document.getElementById('save').addEventListener('click', () => {
+    const start = startPicker.getValue();
+    const end = endPicker.getValue();
+    if (new Date(end) <= new Date(start)) { showToast('End must be after start'); return; }
+    const fresh = getFastState();
+    fresh.history[idx] = { ...entry, start, end };
+    Store.set('fast', fresh);
+    closeModal();
+    showToast('Updated');
+    renderLog();
+    if (document.querySelector('.tab[data-tab="trends"]').classList.contains('active')) renderTrends();
+    checkAchievements();
+  });
+  document.getElementById('del').addEventListener('click', () => {
+    if (!confirm('Delete this fast?')) return;
+    const fresh = getFastState();
+    fresh.history.splice(idx, 1);
+    Store.set('fast', fresh);
+    closeModal();
+    showToast('Deleted');
+    renderLog();
+    if (document.querySelector('.tab[data-tab="trends"]').classList.contains('active')) renderTrends();
+  });
 }
 
 /* ===== WEIGHT ===== */
@@ -823,6 +2036,7 @@ function saveWeight() {
   Store.set('weights', weights);
   showToast('Weight saved');
   renderLog();
+  checkAchievements();
 }
 
 /* ===== WORKOUTS A/B ===== */
@@ -842,24 +2056,26 @@ function renderActiveWorkout(view, active) {
   const allDone = doneCount === total;
 
   view.innerHTML = `
-    <div class="section-label">In Progress</div>
-    <div class="card active-workout">
-      <h2>${w.title}</h2>
-      <div class="focus">${w.focus} · ${doneCount} of ${total} done</div>
-      ${w.exercises.map((ex, i) => `
-        <div class="exercise-row ${active.completed[i] ? 'done' : ''}" data-i="${i}">
-          <div class="checkbox ${active.completed[i] ? 'checked' : ''}"></div>
-          <div class="exercise-info">
-            <div class="exercise-name">${ex.name}</div>
-            <div class="exercise-sets">${ex.sets}</div>
+    <div style="padding-top:20px;">
+      <div class="section-label">In Progress</div>
+      <div class="card active-workout">
+        <h2>${w.title}</h2>
+        <div class="focus">${w.focus} · ${doneCount} of ${total} done</div>
+        ${w.exercises.map((ex, i) => `
+          <div class="exercise-row ${active.completed[i] ? 'done' : ''}" data-i="${i}">
+            <div class="checkbox ${active.completed[i] ? 'checked' : ''}"></div>
+            <div class="exercise-info">
+              <div class="exercise-name">${ex.name}</div>
+              <div class="exercise-sets">${ex.sets}</div>
+            </div>
           </div>
+        `).join('')}
+        <div class="button-row">
+          <button class="secondary" id="cancel-workout">Cancel</button>
+          <button class="primary" id="finish-workout" ${!allDone ? 'disabled' : ''}>
+            ${allDone ? 'Finish' : `${doneCount}/${total}`}
+          </button>
         </div>
-      `).join('')}
-      <div class="button-row">
-        <button class="secondary" id="cancel-workout">Cancel</button>
-        <button class="primary" id="finish-workout" ${!allDone ? 'disabled' : ''}>
-          ${allDone ? 'Finish' : `${doneCount}/${total}`}
-        </button>
       </div>
     </div>
   `;
@@ -885,6 +2101,7 @@ function renderActiveWorkout(view, active) {
     Store.set('activeWorkout', null);
     showToast(`${w.title} logged`);
     renderLog();
+    checkAchievements();
   });
 }
 
@@ -896,28 +2113,25 @@ function openCustomModal() {
     <label>Notes</label>
     <textarea id="custom-notes" placeholder="e.g. 30 min kettlebell flow, yard work, basketball"></textarea>
     <label>When</label>
-    <input type="datetime-local" id="custom-when" value="${toLocalInput(new Date().toISOString())}">
-    <div class="button-row">
+    <div id="custom-picker"></div>
+    <div class="button-row" style="margin-top:18px;">
       <button class="secondary" id="custom-cancel">Cancel</button>
       <button class="primary" id="custom-save">Save</button>
     </div>
   `);
-  setTimeout(() => document.getElementById('custom-notes').focus(), 100);
+  const picker = setupDateTimePicker(document.getElementById('custom-picker'), new Date().toISOString());
+  setTimeout(() => document.getElementById('custom-notes').focus(), 200);
   document.getElementById('custom-cancel').addEventListener('click', closeModal);
   document.getElementById('custom-save').addEventListener('click', () => {
     const notes = document.getElementById('custom-notes').value.trim();
-    const when = document.getElementById('custom-when').value;
     if (!notes) { showToast('Add notes first'); return; }
     const sessions = getSessions();
-    sessions.push({
-      type: 'Custom',
-      date: when ? fromLocalInput(when) : new Date().toISOString(),
-      notes
-    });
+    sessions.push({ type: 'Custom', date: picker.getValue(), notes });
     Store.set('sessions', sessions);
     closeModal();
     showToast('Custom workout logged');
     renderLog();
+    checkAchievements();
   });
 }
 
@@ -931,24 +2145,20 @@ function openWalkRunModal() {
     <label>Minutes (optional)</label>
     <input type="number" id="wr-mins" step="1" inputmode="numeric" placeholder="e.g. 28">
     <label>When</label>
-    <input type="datetime-local" id="wr-when" value="${toLocalInput(new Date().toISOString())}">
-    <div class="button-row">
+    <div id="walk-picker"></div>
+    <div class="button-row" style="margin-top:18px;">
       <button class="secondary" id="wr-cancel">Cancel</button>
-      <button class="primary" id="wr-save">Save</button>
+      <button class="primary cardio" id="wr-save">Save</button>
     </div>
   `);
-  setTimeout(() => document.getElementById('wr-miles').focus(), 100);
+  const picker = setupDateTimePicker(document.getElementById('walk-picker'), new Date().toISOString());
+  setTimeout(() => document.getElementById('wr-miles').focus(), 200);
   document.getElementById('wr-cancel').addEventListener('click', closeModal);
   document.getElementById('wr-save').addEventListener('click', () => {
     const miles = parseFloat(document.getElementById('wr-miles').value);
     const mins = parseInt(document.getElementById('wr-mins').value);
-    const when = document.getElementById('wr-when').value;
     if (isNaN(miles) || miles <= 0) { showToast('Enter miles'); return; }
-    const entry = {
-      type: 'Walk/Run',
-      date: when ? fromLocalInput(when) : new Date().toISOString(),
-      miles
-    };
+    const entry = { type: 'Walk/Run', date: picker.getValue(), miles };
     if (!isNaN(mins) && mins > 0) entry.duration = mins;
     const sessions = getSessions();
     sessions.push(entry);
@@ -956,6 +2166,7 @@ function openWalkRunModal() {
     closeModal();
     showToast(`${miles.toFixed(1)} mi logged`);
     renderLog();
+    checkAchievements();
   });
 }
 
@@ -965,23 +2176,23 @@ function toggleFast() {
   if (s.start) {
     openModal(`
       <h3>End Fast</h3>
-      <div class="modal-sub">Adjust end time if needed (e.g. you forgot to end earlier).</div>
+      <div class="modal-sub">Confirm or adjust the end time (e.g. you ate earlier than you tapped end).</div>
       <label>Start</label>
-      <input type="datetime-local" id="end-fast-start" value="${toLocalInput(s.start)}">
+      <div id="end-start-picker"></div>
       <label>End</label>
-      <input type="datetime-local" id="end-fast-end" value="${toLocalInput(new Date().toISOString())}">
-      <div class="button-row">
+      <div id="end-end-picker"></div>
+      <div class="button-row" style="margin-top:18px;">
         <button class="secondary" id="end-cancel">Cancel</button>
-        <button class="primary" id="end-confirm">End Fast</button>
+        <button class="primary fast" id="end-confirm">End Fast</button>
       </div>
     `);
+    const startP = setupDateTimePicker(document.getElementById('end-start-picker'), s.start);
+    const endP = setupDateTimePicker(document.getElementById('end-end-picker'), new Date().toISOString());
+
     document.getElementById('end-cancel').addEventListener('click', closeModal);
     document.getElementById('end-confirm').addEventListener('click', () => {
-      const startVal = document.getElementById('end-fast-start').value;
-      const endVal = document.getElementById('end-fast-end').value;
-      if (!startVal || !endVal) { showToast('Set times'); return; }
-      const start = fromLocalInput(startVal);
-      const end = fromLocalInput(endVal);
+      const start = startP.getValue();
+      const end = endP.getValue();
       if (new Date(end) <= new Date(start)) { showToast('End must be after start'); return; }
       const fresh = getFastState();
       fresh.history.push({ start, end, goal: fresh.goalHours });
@@ -991,24 +2202,24 @@ function toggleFast() {
       showToast(`Fast: ${fmtDurationShort(new Date(end) - new Date(start))}`);
       if (fastTickHandle) clearInterval(fastTickHandle);
       renderLog();
+      checkAchievements();
     });
   } else {
     openModal(`
       <h3>Start Fast</h3>
-      <div class="modal-sub">Use the current time, or adjust if you forgot to start earlier.</div>
+      <div class="modal-sub">Use now, or adjust if you forgot to start earlier.</div>
       <label>Start Time</label>
-      <input type="datetime-local" id="start-fast-time" value="${toLocalInput(new Date().toISOString())}">
-      <div class="button-row">
+      <div id="start-picker"></div>
+      <div class="button-row" style="margin-top:18px;">
         <button class="secondary" id="start-cancel">Cancel</button>
-        <button class="primary" id="start-confirm">Start Fast</button>
+        <button class="primary fast" id="start-confirm">Start Fast</button>
       </div>
     `);
+    const picker = setupDateTimePicker(document.getElementById('start-picker'), new Date().toISOString());
     document.getElementById('start-cancel').addEventListener('click', closeModal);
     document.getElementById('start-confirm').addEventListener('click', () => {
-      const val = document.getElementById('start-fast-time').value;
-      if (!val) { showToast('Pick a time'); return; }
-      const startIso = fromLocalInput(val);
-      if (new Date(startIso) > new Date()) { showToast('Start must be in the past or now'); return; }
+      const startIso = picker.getValue();
+      if (new Date(startIso) > new Date()) { showToast('Must be past or now'); return; }
       const fresh = getFastState();
       fresh.start = startIso;
       Store.set('fast', fresh);
@@ -1050,63 +2261,23 @@ function editFastStart() {
     <h3>Edit Start Time</h3>
     <div class="modal-sub">When did you actually start fasting?</div>
     <label>Start Time</label>
-    <input type="datetime-local" id="fast-start-edit" value="${toLocalInput(s.start)}">
-    <div class="button-row">
+    <div id="es-picker"></div>
+    <div class="button-row" style="margin-top:18px;">
       <button class="secondary" id="es-cancel">Cancel</button>
-      <button class="primary" id="es-save">Save</button>
+      <button class="primary fast" id="es-save">Save</button>
     </div>
   `);
+  const picker = setupDateTimePicker(document.getElementById('es-picker'), s.start);
   document.getElementById('es-cancel').addEventListener('click', closeModal);
   document.getElementById('es-save').addEventListener('click', () => {
-    const val = document.getElementById('fast-start-edit').value;
-    if (!val) { showToast('Pick a time'); return; }
-    const newIso = fromLocalInput(val);
-    if (new Date(newIso) > new Date()) { showToast('Start must be in the past'); return; }
+    const newIso = picker.getValue();
+    if (new Date(newIso) > new Date()) { showToast('Must be in the past'); return; }
     const fresh = getFastState();
     fresh.start = newIso;
     Store.set('fast', fresh);
     closeModal();
     showToast('Updated');
     renderLog();
-  });
-}
-
-function editFastHistory(reversedIdx) {
-  const s = getFastState();
-  const idx = s.history.length - 1 - reversedIdx;
-  const entry = s.history[idx];
-  if (!entry) return;
-  openModal(`
-    <h3>Edit Fast</h3>
-    <div class="modal-sub">Adjust times or delete.</div>
-    <label>Start</label>
-    <input type="datetime-local" id="edit-start" value="${toLocalInput(entry.start)}">
-    <label>End</label>
-    <input type="datetime-local" id="edit-end" value="${toLocalInput(entry.end)}">
-    <div class="button-row">
-      <button class="danger" id="del-fast">Delete</button>
-      <button class="primary" id="save-edit">Save</button>
-    </div>
-  `);
-  document.getElementById('save-edit').addEventListener('click', () => {
-    const start = fromLocalInput(document.getElementById('edit-start').value);
-    const end = fromLocalInput(document.getElementById('edit-end').value);
-    if (new Date(end) <= new Date(start)) { showToast('End must be after start'); return; }
-    const fresh = getFastState();
-    fresh.history[idx] = { ...entry, start, end };
-    Store.set('fast', fresh);
-    closeModal();
-    showToast('Updated');
-    renderTrends();
-  });
-  document.getElementById('del-fast').addEventListener('click', () => {
-    if (!confirm('Delete this fast entry?')) return;
-    const fresh = getFastState();
-    fresh.history.splice(idx, 1);
-    Store.set('fast', fresh);
-    closeModal();
-    showToast('Deleted');
-    renderTrends();
   });
 }
 
@@ -1177,7 +2348,7 @@ function renderTrends() {
     <div class="trend-card">
       <div class="head">
         <div class="title">Weight</div>
-        <div class="current">${current ? current.value.toFixed(1) : '—'}<span class="unit">lb</span></div>
+        <div class="current" style="color:#FF3D7F;">${current ? current.value.toFixed(1) : '—'}<span class="unit">lb</span></div>
       </div>
       <div class="stats">
         <span>7d avg: <strong>${avg7 ? avg7.toFixed(1) : '—'}</strong></span>
@@ -1197,7 +2368,7 @@ function renderTrends() {
     <div class="trend-card">
       <div class="head">
         <div class="title">Sessions / Week</div>
-        <div class="current">${liftCounts[liftCounts.length-1]}<span class="unit">this wk</span></div>
+        <div class="current" style="color:#E8A33D;">${liftCounts[liftCounts.length-1]}<span class="unit">this wk</span></div>
       </div>
       <div class="stats">
         <span>Goal: <strong>${WEEK_GOAL}</strong></span>
@@ -1211,7 +2382,7 @@ function renderTrends() {
     <div class="trend-card">
       <div class="head">
         <div class="title">Miles / Week</div>
-        <div class="current">${milesPerWeek[milesPerWeek.length-1].toFixed(1)}<span class="unit">mi</span></div>
+        <div class="current" style="color:#4ECDC4;">${milesPerWeek[milesPerWeek.length-1].toFixed(1)}<span class="unit">mi</span></div>
       </div>
       <div class="stats">
         <span>Last 7d: <strong>${last7Miles.toFixed(1)} mi</strong></span>
@@ -1225,7 +2396,7 @@ function renderTrends() {
     <div class="trend-card">
       <div class="head">
         <div class="title">Fast Duration</div>
-        <div class="current">${fastHist.length>0?fmtDurationShort(new Date(fastHist[fastHist.length-1].end) - new Date(fastHist[fastHist.length-1].start)):'—'}<span class="unit">last</span></div>
+        <div class="current" style="color:#B388EB;">${fastHist.length>0?fmtDurationShort(new Date(fastHist[fastHist.length-1].end) - new Date(fastHist[fastHist.length-1].start)):'—'}<span class="unit">last</span></div>
       </div>
       <div class="stats">
         <span>Goal: <strong>${fast.goalHours}h</strong></span>
@@ -1233,10 +2404,6 @@ function renderTrends() {
         <span>Logged: <strong>${fast.history.length}</strong></span>
       </div>
       <div id="fast-chart"></div>
-      <div style="margin-top:18px;">
-        <div class="section-label" style="margin-bottom:4px;">Recent Fasts <span class="meta">tap to edit</span></div>
-        <div id="fast-history-list"></div>
-      </div>
     </div>
   `;
 
@@ -1249,41 +2416,22 @@ function renderTrends() {
     });
   });
 
-  renderLineChart('weight-chart', weights, parseInt(wRange));
+  renderLineChart('weight-chart', weights, parseInt(wRange), '#FF3D7F');
   renderBarChart('sessions-chart', buckets.map((wb, i) => ({
     label: fmtWeekLabel(wb.start), value: liftCounts[i]
-  })), { goal: WEEK_GOAL, unit: '' });
+  })), { goal: WEEK_GOAL, unit: '', color: '#E8A33D', colorDim: '#8A6224' });
   renderBarChart('miles-chart', buckets.map((wb, i) => ({
     label: fmtWeekLabel(wb.start), value: milesPerWeek[i]
-  })), { unit: 'mi', decimals: 1 });
+  })), { unit: 'mi', decimals: 1, color: '#4ECDC4', colorDim: '#2A7873' });
   renderBarChart('fast-chart', fastHist.map(f => ({
     label: fmtDate(f.end),
     value: (new Date(f.end) - new Date(f.start)) / 3600 / 1000
-  })), { goal: fast.goalHours, unit: 'h', decimals: 1 });
-
-  const list = document.getElementById('fast-history-list');
-  if (fast.history.length === 0) {
-    list.innerHTML = '<div class="empty">No fasts logged.</div>';
-  } else {
-    list.innerHTML = fast.history.slice().reverse().slice(0, 10).map((f, i) => {
-      const dur = new Date(f.end) - new Date(f.start);
-      const hours = dur / 3600 / 1000;
-      const hit = hours >= (f.goal || 17);
-      return `
-        <div class="history-item" data-fast-i="${i}" style="cursor:pointer;">
-          <span class="date">${fmtDateLong(f.end)}</span>
-          <span class="type" style="color: ${hit ? 'var(--success)' : 'var(--text-dim)'};">${fmtDurationShort(dur)}</span>
-          <span class="detail" style="color:var(--text-muted);font-size:10px;">${fmtTime(f.start)} → ${fmtTime(f.end)}</span>
-        </div>`;
-    }).join('');
-    list.querySelectorAll('[data-fast-i]').forEach(el => {
-      el.addEventListener('click', () => editFastHistory(parseInt(el.dataset.fastI)));
-    });
-  }
+  })), { goal: fast.goalHours, unit: 'h', decimals: 1, color: '#B388EB', colorDim: '#6D4A8E' });
 }
 
-function renderLineChart(elId, weights, days) {
+function renderLineChart(elId, weights, days, color) {
   const el = document.getElementById(elId);
+  const lineColor = color || 'var(--accent)';
   let data = weights;
   if (days > 0 && weights.length > 0) {
     const cutoff = new Date();
@@ -1338,11 +2486,11 @@ function renderLineChart(elId, weights, days) {
       ${yLabels}
       <polyline points="${dailyLine}" fill="none" stroke="var(--text-muted)" stroke-width="1" stroke-opacity="0.6" />
       ${dots}
-      <polyline points="${avgLine}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+      <polyline points="${avgLine}" fill="none" stroke="${lineColor}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
       ${xLabels}
     </svg>
     <div class="chart-legend">
-      <span><span class="swatch" style="background:var(--accent);"></span>7d avg</span>
+      <span><span class="swatch" style="background:${lineColor};"></span>7d avg</span>
       <span><span class="swatch" style="background:var(--text-muted);"></span>daily</span>
     </div>
   `;
@@ -1354,7 +2502,9 @@ function renderBarChart(elId, data, opts = {}) {
     el.innerHTML = '<div class="empty">no data yet</div>';
     return;
   }
-  const { goal, unit = '', decimals = 0 } = opts;
+  const { goal, unit = '', decimals = 0, color, colorDim } = opts;
+  const activeColor = color || 'var(--accent)';
+  const dimColor = colorDim || 'var(--accent-dim)';
   const W = 560, H = 140, P = { top: 14, right: 14, bottom: 22, left: 32 };
   const innerW = W - P.left - P.right;
   const innerH = H - P.top - P.bottom;
@@ -1368,7 +2518,7 @@ function renderBarChart(elId, data, opts = {}) {
     const h = (d.value / max) * innerH;
     const y = P.top + innerH - h;
     const isLast = i === data.length - 1;
-    return `<rect x="${x}" y="${y}" width="${barW}" height="${Math.max(h, 1)}" fill="${isLast ? 'var(--accent)' : 'var(--accent-dim)'}" rx="1" />`;
+    return `<rect x="${x}" y="${y}" width="${barW}" height="${Math.max(h, 1)}" fill="${isLast ? activeColor : dimColor}" rx="1" />`;
   }).join('');
 
   let goalLine = '';
@@ -1405,6 +2555,7 @@ function renderData() {
   const fast = getFastState();
   const sessions = getSessions();
   const weights = getWeights();
+  const earned = Store.get('achievements', {});
   const totalSize = KEYS.reduce((sum, k) => {
     const v = localStorage.getItem(k);
     return sum + (v ? v.length : 0);
@@ -1414,7 +2565,7 @@ function renderData() {
     <div class="section-label">Settings</div>
     <div class="data-block">
       <h3>Fast Goal</h3>
-      <p>Target hours per fast. Used for the progress bar and goal lines on the trends chart.</p>
+      <p>Target hours per fast. Drives the progress bar and the goal lines in trends.</p>
       <div class="row">
         <input type="number" id="fast-goal-input" min="12" max="24" step="0.5" value="${fast.goalHours}">
         <button class="primary" id="save-goal">Save</button>
@@ -1437,22 +2588,23 @@ function renderData() {
     <div class="section-label">Storage</div>
     <div class="data-block">
       <h3>Where Your Data Lives</h3>
-      <p>Everything is stored in your browser's <strong>localStorage</strong> on this device. Nothing is sent anywhere. Switching browsers, devices, or clearing site data starts you fresh. Export regularly if that matters to you.</p>
+      <p>Everything is in your browser's <strong>localStorage</strong> on this device. Nothing is sent anywhere. Switching browsers, devices, or clearing site data starts you fresh. Export regularly if that matters to you.</p>
       <div class="key-row"><span class="k">Sessions (workouts, walks)</span><span class="v">${sessions.length}</span></div>
       <div class="key-row"><span class="k">Weight entries</span><span class="v">${weights.length}</span></div>
       <div class="key-row"><span class="k">Fasts logged</span><span class="v">${fast.history.length}</span></div>
+      <div class="key-row"><span class="k">Milestones earned</span><span class="v">${Object.keys(earned).length} / ${ACHIEVEMENTS.length}</span></div>
       <div class="key-row"><span class="k">Total storage</span><span class="v">${(totalSize / 1024).toFixed(1)} KB</span></div>
     </div>
 
     <div class="section-label">Danger</div>
     <div class="data-block">
       <h3>Wipe All Data</h3>
-      <p>Erase everything. Export first if you want a backup.</p>
+      <p>Erase everything including milestones. Export first if you want a backup.</p>
       <button class="danger" id="wipe-btn">Wipe Everything</button>
     </div>
 
     <div class="data-block" style="border:none;background:none;text-align:center;padding-top:0;margin-top:8px;">
-      <p style="margin:0;font-style:italic;font-family:var(--serif);color:var(--text-muted);">LOG · v2</p>
+      <p style="margin:0;font-style:italic;font-family:var(--serif);color:var(--text-muted);">LOG · v5</p>
     </div>
   `;
 
@@ -1478,7 +2630,7 @@ function exportData() {
     }
   });
   const out = {
-    meta: { app: 'LOG', version: 2, exportedAt: new Date().toISOString() },
+    meta: { app: 'LOG', version: 5, exportedAt: new Date().toISOString() },
     data
   };
   const blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
@@ -1511,6 +2663,7 @@ document.getElementById('import-file').addEventListener('change', (e) => {
       showToast('Imported');
       renderLog();
       renderData();
+      checkAchievements();
     } catch {
       showToast('Invalid file');
     }
@@ -1533,6 +2686,8 @@ function init() {
   updateHeader();
   setTab(Store.get('lastTab', 'log'));
   setInterval(updateHeader, 60000);
+  // Check achievements on load (silent, just to back-populate earned from existing data)
+  checkAchievements();
 }
 init();
 </script>
