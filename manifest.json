@@ -1,0 +1,25 @@
+{
+  "name": "LOG",
+  "short_name": "LOG",
+  "description": "Personal training, fasting, weight, and zero-alcohol tracker.",
+  "start_url": "/WeightTraining/",
+  "scope": "/WeightTraining/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14110F",
+  "theme_color": "#14110F",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
